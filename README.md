@@ -2,8 +2,8 @@
 
 Commandes utiles
 ----------------
-	__ionic serve__ - Lance la compilation et l'appli
-	__ng generate__ - Generation des composants
+	*ionic serve* - Lance la compilation et l'appli
+	*ng generate* - Generation des composants
 
 FireBase
 --------
