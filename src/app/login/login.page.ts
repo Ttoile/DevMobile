@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from '../services/authentification.service';
 
 @Component({
   selector: 'app-login',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  constructor(private authServ : AuthService) {
 
-  constructor() { }
+  }
 
   ngOnInit() {
+  }
+
+  logIn(log: string, mdp: string){
+    this.authServ.login(log, mdp);
   }
 
 }

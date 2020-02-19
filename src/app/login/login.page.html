@@ -2,4 +2,7 @@
   <ion-toolbar>
     <ion-title>login</ion-title>
   </ion-toolbar>
+  <ion-input #login>Login</ion-input>
+  <ion-input #motDePasse>Mot de passe</ion-input>
+  <ion-button (click)=logIn(login.value,motDePasse.value)>Login</ion-button>
 </ion-header>

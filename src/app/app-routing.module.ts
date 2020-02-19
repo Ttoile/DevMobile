@@ -6,17 +6,17 @@ const routes: Routes = [
   { path: '', redirectTo: 'todoslist', pathMatch: 'full' },
   {
     path: 'todoslist',
-    loadChildren: () => import('./todoslist/todoslist.module').then( m => m.TodoslistPageModule)
-    // canActivate: [AuthguardGuard]
+    loadChildren: () => import('./todoslist/todoslist.module').then( m => m.TodoslistPageModule),
+    canActivate: [AuthguardGuard]
   },
   {
     path: 'addtodo',
-    loadChildren: () => import('./addtodo/addtodo.module').then( m => m.AddtodoPageModule)
-    // canActivate: [AuthguardGuard]
+    loadChildren: () => import('./addtodo/addtodo.module').then( m => m.AddtodoPageModule),
+    canActivate: [AuthguardGuard]
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
   },
 ];
 
