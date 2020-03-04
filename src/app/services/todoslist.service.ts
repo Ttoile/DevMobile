@@ -14,6 +14,8 @@ export class TodoslistService {
   private todos: Observable<Array<Todo>>;
 
   constructor(private db: AngularFirestore) {
+    //faire une collection de collection pour recuperer
+    //toutes les listes
     this.todosCollection = db.collection<Todo>('todos');
 
     this.todos = this.todosCollection.snapshotChanges().pipe(
