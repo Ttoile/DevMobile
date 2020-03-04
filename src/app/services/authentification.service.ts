@@ -33,4 +33,12 @@ export class AuthService {
         .signOut();
   }
 
+  getUsername(){
+    return firebase.auth().currentUser?firebase.auth().currentUser.email:"";
+  }
+
+  isConnected(){
+    return firebase.auth().currentUser?true:false;
+  }
+
 }

@@ -16,7 +16,7 @@ export class TodoslistPage implements OnInit {
 
   ngOnInit(): void {
     this.todos$ = this.listService.get();
-  }  
+  }
 
   delete(todo: Todo){
     this.listService.delete(todo);
