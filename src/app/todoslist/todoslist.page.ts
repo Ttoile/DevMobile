@@ -10,13 +10,13 @@ import { Observable } from 'rxjs';
 })
 export class TodoslistPage implements OnInit {
 
-  private todos$: Observable<Array<Todo>>;
+  private todos: Array<Todo>;
 
   constructor(private listService: TodoslistService) {}
 
   ngOnInit(): void {
-    this.todos$ = this.listService.get();
-  }  
+    this.listService.get().subscribe(res => this.todos = res);
+  }
 
   delete(todo: Todo){
     this.listService.delete(todo);

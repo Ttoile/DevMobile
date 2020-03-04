@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../services/authentification.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,7 @@ import {AuthService} from '../services/authentification.service';
 })
 export class LoginPage implements OnInit {
   private hideErrMessage: boolean;
-  constructor(private authServ : AuthService) {
+  constructor(private authServ : AuthService, private router: Router) {
     this.hideErrMessage=true;
   }
 
@@ -20,11 +21,11 @@ export class LoginPage implements OnInit {
       {
       console.log('Nice, it worked!');
       this.hideErrMessage = true;
+      this.router.navigate(['todoslist']);
     }).catch(err =>
       {
       console.log('Something went wrong:',err.message);
       this.hideErrMessage = false;
     });
   }
-
 }

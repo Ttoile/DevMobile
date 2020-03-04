@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 
 import * as firebase from 'firebase/app';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor() {
+  constructor(private router: Router) {
   }
 
   signup(email: string, password: string) {
@@ -19,6 +20,7 @@ export class AuthService {
         .catch(err => {
           console.log('Something went wrong:',err.message);
         });
+    this.router.navigate(['/login']);
   }
 
   login(email: string, password: string): Promise<firebase.auth.UserCredential> {

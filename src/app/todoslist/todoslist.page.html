@@ -9,7 +9,7 @@
 
 <ion-content fullscreen>
   <ion-list>
-    <ion-item-sliding *ngFor="let todo of todos$ | async">
+    <ion-item-sliding *ngFor="let todo of todos">
       <ion-item>
         <ion-label>
           <h2>{{ todo.title }}</h2>
