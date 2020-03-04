@@ -1,0 +1,11 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{this.title}}
+    </ion-title>
+    <ion-buttons slot="end" *ngIf="connected">
+      {{this.userName}}
+      <ion-button (click)="this.authServ.logout()">Disconnect</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>

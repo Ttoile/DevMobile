@@ -1,11 +1,4 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Todos
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
+<app-header [title]="'Todos'"></app-header>
 
 <ion-content fullscreen>
   <ion-list>
@@ -23,7 +16,7 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
-  <section>   
+  <section>
   <ion-button expand="block" [routerDirection]="'root'"
   [routerLink]="'/addtodo'">Add a New Todo</ion-button>
   </section>
