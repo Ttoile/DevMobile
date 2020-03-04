@@ -1,9 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>login</ion-title>
+    <ion-title>Log In</ion-title>
   </ion-toolbar>
-  <ion-input #login>Login</ion-input>
-  <ion-input #motDePasse>Mot de passe</ion-input>
+  <ion-input #login>Login : </ion-input>
+  <ion-input #motDePasse>Password : </ion-input>
   <ion-button (click)=logIn(login.value,motDePasse.value)>Login</ion-button>
   <ion-button routerLink="/sign-up">Sign-Up</ion-button>
+  <div [hidden]="hideErrMessage" class="connectionFailedMessage">Incorrect login or password. Please try again or create an account.</div>
 </ion-header>
