@@ -5,10 +5,10 @@
     </ion-title>
     <ion-buttons slot="end" *ngIf="connected">
       {{this.userName}}
-      <ion-button (click)="this.authServ.logout()">Disconnect</ion-button>
+      <ion-button fill="solid" color="primary" (click)="this.authServ.logout()">Disconnect</ion-button>
     </ion-buttons>
     <ion-buttons slot="end" *ngIf="!connected">
-      <ion-button (click)="this.router.navigate(['/login'])">Login</ion-button>
+      <ion-button fill="solid" color="primary" (click)="this.router.navigate(['/login'])">Login</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
