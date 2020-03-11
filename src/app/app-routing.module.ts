@@ -24,11 +24,13 @@ const routes: Routes = [
   },
   {
     path: 'listslist',
-    loadChildren: () => import('./listslist/listslist.module').then( m => m.ListslistPageModule)
+    loadChildren: () => import('./listslist/listslist.module').then( m => m.ListslistPageModule),
+    canActivate: [AuthguardGuard]
   },
   {
     path: 'add-list',
-    loadChildren: () => import('./add-list/add-list.module').then( m => m.AddListPageModule)
+    loadChildren: () => import('./add-list/add-list.module').then( m => m.AddListPageModule),
+    canActivate: [AuthguardGuard]
   },
 ];
 

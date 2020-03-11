@@ -25,6 +25,9 @@
           <div padding>
             <ion-button  size="large" type="submit" [disabled]="form.invalid" expand="block">Register</ion-button>
           </div>
+          <div padding>
+            <ion-text color="danger" *ngIf="!hideErrMessage">{{errMessage}}</ion-text>
+          </div>
         </ion-col>
       </ion-row>
     </ion-grid>

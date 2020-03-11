@@ -10,17 +10,23 @@ export class AuthService {
   constructor(private router: Router) {
   }
 
-  signup(email: string, password: string) {
-    firebase
+  // signup(email: string, password: string) {
+  //   firebase
+  //       .auth()
+  //       .createUserWithEmailAndPassword(email, password)
+  //       .then(value => {
+  //         console.log('Success!', value);
+  //       })
+  //       .catch(err => {
+  //         console.log('Something went wrong:',err.message);
+  //       });
+  //   this.router.navigate(['/login']);
+  // }
+
+  signup(email: string, password: string): Promise<firebase.auth.UserCredential> {
+    return firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
-        .then(value => {
-          console.log('Success!', value);
-        })
-        .catch(err => {
-          console.log('Something went wrong:',err.message);
-        });
-    this.router.navigate(['/login']);
   }
 
   login(email: string, password: string): Promise<firebase.auth.UserCredential> {

@@ -12,6 +12,7 @@ export class LoginPage implements OnInit {
   private errMessage: String;
   constructor(private authServ : AuthService, private router: Router) {
     this.hideErrMessage=true;
+    this.errMessage = "";
   }
 
   ngOnInit() {
@@ -26,6 +27,7 @@ export class LoginPage implements OnInit {
     }).catch(err =>
       {
       console.log('Something went wrong:',err.message);
+      this.errMessage = err.message;
       this.hideErrMessage = false;
     });
   }

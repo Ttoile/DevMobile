@@ -14,7 +14,7 @@
             </ion-item>
           </div>
           <div padding>
-            <p class="connectionFailedMessage" *ngIf="!hideErrMessage">Incorrect email or password</p>
+            <ion-text color="danger" *ngIf="!hideErrMessage">{{errMessage}}</ion-text>
           </div>
           <div padding>
             <ion-button  size="large" type="submit" [disabled]="form.invalid" expand="block">Log in</ion-button>
