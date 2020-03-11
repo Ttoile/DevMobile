@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { TodoslistPageRoutingModule } from './todoslist-routing.module';
 
 import { TodoslistPage } from './todoslist.page';
-import { HeaderComponent } from "../small-components/header/header.component";
 
 @NgModule({
   imports: [
@@ -16,6 +15,6 @@ import { HeaderComponent } from "../small-components/header/header.component";
     IonicModule,
     TodoslistPageRoutingModule
   ],
-  declarations: [TodoslistPage, HeaderComponent]
+  declarations: [TodoslistPage]
 })
 export class TodoslistPageModule {}
