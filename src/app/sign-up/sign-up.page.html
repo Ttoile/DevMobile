@@ -1,19 +1,7 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>SignUp</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header [title]="'Sign up'"></app-header>
 
-<ion-content>
-  <ion-input #login type="text">Adresse Mail</ion-input>
-  <ion-input #confirmLogin type="text">Confirmation adresse mail</ion-input>
-  <ion-input #motDePasse type="text">Mot de passe</ion-input>
-  <ion-input #confirmMotDePasse type="text">Confirmation mot de passe</ion-input>
-  <ion-button (click)=signUp(login.value,motDePasse.value,confirmLogin.value,confirmMotDePasse.value)>Sign-Up</ion-button>
-</ion-content>
-<!-- 
-<ion-content  color="primary">
-  <form  #form="ngForm" (ngSubmit)="register(form)">
+<ion-content >
+  <form  #form="ngForm" (ngSubmit)="signUp(login.value,motDePasse.value,confirmLogin.value,confirmMotDePasse.value)">
     <ion-grid>
       <ion-row color="primary" justify-content-center>
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
@@ -22,16 +10,16 @@
           </div>
           <div padding>
             <ion-item>
-              <ion-input  name="name" type="text" placeholder="Name" ngModel required></ion-input>
+              <ion-input  name="email" type="email" placeholder="your@email.com" ngModel required #login></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input name="email" type="email" placeholder="your@email.com" ngModel required></ion-input>
+              <ion-input name="confirmemail" type="email" placeholder="your@email.com again" ngModel required #confirmLogin></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input name="password" type="password" placeholder="Password" ngModel required></ion-input>
+              <ion-input name="password" type="password" placeholder="Password" ngModel required #motDePasse></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input name="confirm" type="password" placeholder="Password again" ngModel required></ion-input>
+              <ion-input name="confirm" type="password" placeholder="Password again" ngModel required #confirmMotDePasse></ion-input>
             </ion-item>
           </div>
           <div padding>
@@ -41,4 +29,14 @@
       </ion-row>
     </ion-grid>
   </form>
+</ion-content>
+
+
+
+<!-- <ion-content>
+  <ion-input #login type="text">Adresse Mail</ion-input>
+  <ion-input #confirmLogin type="text">Confirmation adresse mail</ion-input>
+  <ion-input #motDePasse type="text">Mot de passe</ion-input>
+  <ion-input #confirmMotDePasse type="text">Confirmation mot de passe</ion-input>
+  <ion-button (click)=signUp(login.value,motDePasse.value,confirmLogin.value,confirmMotDePasse.value)>Sign-Up</ion-button>
 </ion-content> -->

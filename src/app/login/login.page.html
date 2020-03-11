@@ -14,6 +14,9 @@
             </ion-item>
           </div>
           <div padding>
+            <p class="connectionFailedMessage" *ngIf="!hideErrMessage">Incorrect email or password</p>
+          </div>
+          <div padding>
             <ion-button  size="large" type="submit" [disabled]="form.invalid" expand="block">Log in</ion-button>
           </div>
           <div padding>
@@ -24,15 +27,3 @@
     </ion-grid>
   </form>
 </ion-content>
-
-
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>Log In</ion-title>
-  </ion-toolbar>
-  <ion-input #login>Login : </ion-input>
-  <ion-input #motDePasse>Password : </ion-input>
-  <ion-button (click)=logIn(login.value,motDePasse.value)>Login</ion-button>
-  <ion-button routerLink="/sign-up">Sign-Up</ion-button>
-  <div [hidden]="hideErrMessage" class="connectionFailedMessage">Incorrect login or password. Please try again or create an account.</div>
-</ion-header> -->
