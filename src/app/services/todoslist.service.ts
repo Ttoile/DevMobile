@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Todo } from '../model/todo';
+import {List, Todo} from '../model/todo';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -14,8 +14,6 @@ export class TodoslistService {
   private todos: Observable<Array<Todo>>;
 
   constructor(private db: AngularFirestore) {
-    //faire une collection de collection pour recuperer
-    //toutes les listes
     this.todosCollection = db.collection<Todo>('todos');
 
     this.todos = this.todosCollection.snapshotChanges().pipe(
@@ -40,5 +38,4 @@ export class TodoslistService {
   delete(todo: Todo){
     return this.todosCollection.doc(todo.id).delete();
   }
-
 }
