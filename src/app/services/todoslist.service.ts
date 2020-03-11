@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Todo } from '../model/todo';
+import {List, Todo} from '../model/todo';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -38,5 +38,4 @@ export class TodoslistService {
   delete(todo: Todo){
     return this.todosCollection.doc(todo.id).delete();
   }
-
 }

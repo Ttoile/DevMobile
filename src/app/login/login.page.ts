@@ -22,7 +22,7 @@ export class LoginPage implements OnInit {
       {
       console.log('Nice, it worked!');
       this.hideErrMessage = true;
-      this.router.navigate(['todoslist']);
+      this.router.navigate(['listslist']);
     }).catch(err =>
       {
       console.log('Something went wrong:',err.message);
