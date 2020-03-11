@@ -11,11 +11,11 @@ export class LoginPage implements OnInit {
   private hideErrMessage: boolean;
   private errMessage: String;
   constructor(private authServ : AuthService, private router: Router) {
-    this.hideErrMessage=true;
-    this.errMessage = "";
   }
 
   ngOnInit() {
+    this.hideErrMessage=true;
+    this.errMessage = "";
   }
 
   logIn(log: string, mdp: string){

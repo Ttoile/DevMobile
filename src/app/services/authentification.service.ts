@@ -39,6 +39,7 @@ export class AuthService {
     firebase
         .auth()
         .signOut();
+    this.router.navigate(['/login']);
   }
 
   getUsername(){

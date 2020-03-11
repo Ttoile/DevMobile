@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from 'src/app/services/authentification.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,7 @@ export class HeaderComponent implements OnInit {
   connected: boolean;
   userName: String;
 
-  constructor(private authServ : AuthService) {
+  constructor(private authServ : AuthService, private router: Router) {
   }
 
   ngOnInit() {

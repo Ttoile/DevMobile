@@ -31,7 +31,7 @@ export class SignUpPage implements OnInit {
       this.authServ.signup(log, mdp).then(value => {
                 console.log('Success!', value);
                 this.hideErrMessage = true;
-                this.router.navigate(['/login']);;
+                this.router.navigate(['/login']);
               })
               .catch(err => {
                 this.hideErrMessage = false;
