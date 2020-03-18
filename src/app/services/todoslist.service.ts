@@ -13,9 +13,11 @@ export class TodoslistService {
 
   private todos: Observable<Array<Todo>>;
 
-  constructor(private db: AngularFirestore) {
-    this.todosCollection = db.collection<Todo>('todos');
+  constructor(private db: AngularFirestore) {}
 
+  // /!\ ATTENTION /!\ ce setUp doit absolument être appelé quand on va se servire de todolist pour une nouvelle liste (exemple: dans le constructeur de todolist.page.ts)
+  setUp(listeid: string){
+    this.todosCollection = this.db.collection("list").doc(listeid).collection<Todo>("todos");
     this.todos = this.todosCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
@@ -27,15 +29,17 @@ export class TodoslistService {
     );
   }
 
-  get(): Observable<Array<Todo>> {
+  get(id: string): Observable<Array<Todo>> {
     return this.todos;
   }
 
-  add(todo: Todo) {
+  add(listeid:string, todo: Todo) {
     return this.todosCollection.add(todo);
   }
 
-  delete(todo: Todo){
+  delete(listeid: string, todo: Todo){
+    // return this.todosCollection.doc(todo.id).delete();
     return this.todosCollection.doc(todo.id).delete();
+    // console.log("TODO REMOVE");
   }
 }

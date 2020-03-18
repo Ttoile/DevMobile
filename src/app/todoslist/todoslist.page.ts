@@ -12,18 +12,20 @@ import { ParamMap, ActivatedRoute } from '@angular/router';
 })
 export class TodoslistPage implements OnInit {
 
-  param: string;
+  listeID: string;
 
   private todos: Array<Todo>;
 
   constructor(private listService: TodoslistService, private route: ActivatedRoute) {}
 
+  // TODO : Idea, here prepare the TodoslistService by sending it the LIST ID with a function that set it up
   ngOnInit(): void {
-    this.listService.get().subscribe(res => this.todos = res);
-    this.param = this.route.snapshot.paramMap.get('param');
+    this.listeID = this.route.snapshot.paramMap.get('param');
+    this.listService.setUp(this.listeID); // ESSENTIEL (Go voir les sources)
+    this.listService.get(this.listeID).subscribe(res => this.todos = res);
   }
 
   delete(todo: Todo){
-    this.listService.delete(todo);
+    this.listService.delete(this.listeID, todo);
   }
 }

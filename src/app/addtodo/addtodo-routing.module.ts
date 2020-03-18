@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: AddtodoPage
+  },
+  {
+    path: ':liste',
+    component: AddtodoPage
   }
 ];
 
