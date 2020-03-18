@@ -3,6 +3,7 @@ import {List, Todo, uid} from '../model/todo';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AuthService } from './authentification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,8 @@ export class CollecList{
   private listCollection: AngularFirestoreCollection<List>;
   private lists: Observable<Array<List>>;
 
-  constructor(private db: AngularFirestore) {
-    this.listCollection = db.collection<List>('list');
+  constructor(private db: AngularFirestore, private authServ : AuthService) {
+    this.listCollection = db.collection<List>('list', ref=>ref.where('ownerID','==',this.authServ.getUserID()));
 
     this.lists = this.listCollection.snapshotChanges().pipe(
         map(actions => {
