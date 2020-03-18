@@ -14,4 +14,5 @@ export enum uid {
 export interface List{
   id?: string;
   title: string;
+  ownerID: string;
 }

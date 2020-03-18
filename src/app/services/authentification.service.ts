@@ -46,6 +46,10 @@ export class AuthService {
     return firebase.auth().currentUser?firebase.auth().currentUser.email:"";
   }
 
+  getUserID(){
+    return firebase.auth().currentUser?firebase.auth().currentUser.uid:"";
+  }
+
   isConnected(){
     return firebase.auth().currentUser?true:false;
   }
