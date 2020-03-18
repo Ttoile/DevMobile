@@ -3,7 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthguardGuard } from './services/authguard.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'todoslist', pathMatch: 'full' },
+  { path: '', redirectTo: 'listslist', pathMatch: 'full' },
   {
     path: 'todoslist',
     loadChildren: () => import('./todoslist/todoslist.module').then( m => m.TodoslistPageModule),

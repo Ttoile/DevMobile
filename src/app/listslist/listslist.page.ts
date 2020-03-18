@@ -22,4 +22,6 @@ export class ListslistPage implements OnInit {
     this.listService.delete(list);
   }
 
+  test(test:string){console.log(test)}
+
 }

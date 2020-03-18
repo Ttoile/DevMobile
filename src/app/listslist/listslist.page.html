@@ -1,9 +1,11 @@
-<app-header [title]="'Listes'"></app-header>
+<app-header [title]="'Listes disponibles'"></app-header>
 
 <ion-content fullscreen>
+  <br>
+  <ion-title>Listes personnelles</ion-title>
   <ion-list>
     <ion-item-sliding *ngFor="let list of lists">
-      <ion-item>
+      <ion-item ion-button (click)="test(list.title)" [routerLink]="['/todoslist', 'test123']">
         <ion-label>
           <h2>{{ list.title }}</h2>
         </ion-label>
@@ -20,4 +22,8 @@
     <ion-button expand="block" [routerDirection]="'root'"
                 [routerLink]="'/add-list'">Add a New list</ion-button>
   </section>
+  <br>
+  <ion-title>Listes visibles</ion-title>
+  <br>
+  <ion-title>Listes partagées</ion-title>
 </ion-content>

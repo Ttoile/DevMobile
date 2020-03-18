@@ -15,4 +15,6 @@ export interface List{
   id?: string;
   title: string;
   ownerID: string;
+  readerIDS: string[];
+  writerIDS: string[];
 }
