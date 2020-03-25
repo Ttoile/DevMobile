@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { TodoslistPage } from './todoslist.page';
+import { ContributorManagerPageModule } from '../contributor-manager/contributor-manager.module';
 
 const routes: Routes = [
   {
@@ -15,7 +16,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes), ContributorManagerPageModule],
   exports: [RouterModule],
 })
 export class TodoslistPageRoutingModule {}

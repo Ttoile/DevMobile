@@ -32,6 +32,10 @@ const routes: Routes = [
     loadChildren: () => import('./add-list/add-list.module').then( m => m.AddListPageModule),
     canActivate: [AuthguardGuard]
   },
+  {
+    path: 'contributor-manager',
+    loadChildren: () => import('./contributor-manager/contributor-manager.module').then( m => m.ContributorManagerPageModule)
+  },
 ];
 
 @NgModule({

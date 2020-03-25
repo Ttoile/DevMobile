@@ -1,4 +1,4 @@
-<app-header [title]="listeID + ' -- Replace with list title'"></app-header>
+<app-header [title]="listTitle + ' -- Replace with list title'"></app-header>
 
 <ion-content fullscreen>
   <ion-list>
@@ -19,5 +19,7 @@
   <section>
   <ion-button expand="block" [routerDirection]="'root'"
   [routerLink]="['/addtodo', listeID]">Add a New Todo</ion-button>
+  <ion-button expand="block" (click)="openContributorManager()">Manage contributor</ion-button>
+  <ion-button expand="block" (click)="debug()">DEBUG</ion-button>
   </section>
 </ion-content>
