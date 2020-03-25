@@ -13,6 +13,10 @@ export class ContributorManagerPage implements OnInit {
   ngOnInit() {
   }
 
+  addNewContributor(mail: string){
+
+  }
+
   close(){
     this.contributorManagerController.dismiss();
   }

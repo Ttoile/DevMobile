@@ -39,6 +39,11 @@ export class TodoslistPage implements OnInit {
     console.log(this.listService.getListTitle());
   }
 
+  // TODO
+  isOwner(){
+    return true;
+  }
+
   async openContributorManager(){
     const modal = await this.contributorManagerController.create({
       component: ContributorManagerPage

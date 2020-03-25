@@ -19,7 +19,7 @@
   <section>
   <ion-button expand="block" [routerDirection]="'root'"
   [routerLink]="['/addtodo', listeID]">Add a New Todo</ion-button>
-  <ion-button expand="block" (click)="openContributorManager()">Manage contributor</ion-button>
+  <ion-button expand="block" (click)="openContributorManager()" [disabled]="!isOwner()">Manage contributor</ion-button>
   <ion-button expand="block" (click)="debug()">DEBUG</ion-button>
   </section>
 </ion-content>

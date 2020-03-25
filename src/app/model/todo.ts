@@ -15,6 +15,6 @@ export interface List{
   id?: string;
   title: string;
   ownerID: string;
-  readerIDS: string[];
-  writerIDS: string[];
+  readerIDS: Array<string>;
+  writerIDS: Array<string>;
 }
