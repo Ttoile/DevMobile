@@ -28,4 +28,8 @@ export class TodoslistPage implements OnInit {
   delete(todo: Todo){
     this.listService.delete(this.listeID, todo);
   }
+
+  update(todo: Todo){
+    this.listService.update(todo);
+  }
 }

@@ -37,6 +37,12 @@ export class TodoslistService {
     return this.todosCollection.add(todo);
   }
 
+  update(todo: Todo){
+    let tmp:Todo = todo;
+    tmp.isDone = !tmp.isDone;
+    this.todosCollection.doc(todo.id).update(tmp);
+  }
+
   delete(listeid: string, todo: Todo){
     // return this.todosCollection.doc(todo.id).delete();
     return this.todosCollection.doc(todo.id).delete();
