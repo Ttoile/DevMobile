@@ -22,7 +22,7 @@ export class AddListPage implements OnInit {
   }
 
   addList(){
-    const list = { title: this.title, ownerID: this.authServ.getUserID()} as List;
+    const list = { title: this.title, ownerID: this.authServ.getUserID(), readerIDS: [], writerIDS: []} as List;
     this.listService.addList(list);
     this.router.navigate(['listslist']);
   }

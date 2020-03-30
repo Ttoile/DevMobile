@@ -37,7 +37,7 @@
   <ion-title>Listes partagées</ion-title>
   <ion-list>
     <ion-item-sliding *ngFor="let list of listsShared">
-      <ion-item ion-button (click)="test(list.title)" [routerLink]="['/todoslist', list.id]">
+      <ion-item ion-button [routerLink]="['/todoslist', list.id]">
         <ion-label>
           <h2>{{ list.title }}</h2>
         </ion-label>
