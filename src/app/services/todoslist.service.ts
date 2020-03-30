@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Todo} from '../model/todo';
+import { Todo, List} from '../model/todo';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -12,14 +12,15 @@ export class TodoslistService {
   private listID: string;
 
   private todosCollection: AngularFirestoreCollection<Todo>;
-
   private todos: Observable<Array<Todo>>;
+  private listDoc;
 
   constructor(private db: AngularFirestore) {}
 
-  // /!\ ATTENTION /!\ ce setUp doit absolument être appelé quand on va se servire de todolist pour une nouvelle liste (exemple: dans le constructeur de todolist.page.ts)
+  // /!\ ATTENTION /!\ ce setUp doit absolument être appelé quand on va se servir de todolist pour une nouvelle liste (exemple: dans le constructeur de todolist.page.ts)
   setUp(listeid: string){
     this.listID = listeid;
+    this.listDoc = this.db.collection("list").doc(this.listID).valueChanges();
     this.todosCollection = this.db.collection("list").doc(listeid).collection<Todo>("todos");
     this.todos = this.todosCollection.snapshotChanges().pipe(
       map(actions => {
@@ -47,13 +48,11 @@ export class TodoslistService {
   }
 
   delete(listeid: string, todo: Todo){
-    // return this.todosCollection.doc(todo.id).delete();
     return this.todosCollection.doc(todo.id).delete();
-    // console.log("TODO REMOVE");
   }
 
-  getListTitle(){ // TODO
-    return "TITRE ICI";
+  getListDoc(){ // TODO
+    return this.listDoc;
   }
 
 }

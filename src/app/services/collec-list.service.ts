@@ -13,6 +13,7 @@ export class CollecList{
   private listCollection: AngularFirestoreCollection<List>;
   private listWatchOnlyCollection: AngularFirestoreCollection<List>;
   private listSharedCollection: AngularFirestoreCollection<List>;
+
   private lists: Observable<Array<List>>;
   private listsWatchOnly: Observable<Array<List>>;
   private listsShared: Observable<Array<List>>;
@@ -70,12 +71,18 @@ export class CollecList{
   delete(list: List){
     return this.listCollection.doc(list.id).delete();
   }
-  //
-  // allowRead(list: List): boolean{
-  //   return (list.uids === uid.user) || (list.uids === uid.admin);
-  // }
-  //
-  // allowWrite(list: List){
-  //   return (list.uids === uid.admin);
-  // }
+
+  getListById(id: string){
+    let test = this.db.collection<List>('list', ref=>ref.where('id','==',id));
+    return test.snapshotChanges().pipe(
+        map(actions => {
+          return actions.map(a => {
+            const data = a.payload.doc.data();
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
+        })
+    );
+  }
+
 }
