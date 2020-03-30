@@ -18,3 +18,9 @@ export interface List{
   readerIDS: Array<string>;
   writerIDS: Array<string>;
 }
+
+export interface User{
+  id?: string;
+  email: string;
+  uid: string;
+}

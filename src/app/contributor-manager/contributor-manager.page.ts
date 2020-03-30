@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-contributor-manager',
@@ -8,7 +9,7 @@ import { ModalController } from '@ionic/angular';
 })
 export class ContributorManagerPage implements OnInit {
 
-  constructor(private contributorManagerController: ModalController) { }
+  constructor(private contributorManagerController: ModalController, private users: UsersService) { }
 
   ngOnInit() {
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../services/authentification.service';
 import { Router } from '@angular/router';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 export class SignUpPage implements OnInit {
   private hideErrMessage:boolean;
   private errMessage:String;
-  constructor(private authServ:AuthService, private router: Router) { }
+  constructor(private authServ:AuthService, private users: UsersService, private router: Router) { }
 
   ngOnInit() {
     this.hideErrMessage = true;
@@ -30,6 +31,8 @@ export class SignUpPage implements OnInit {
     }else{
       this.authServ.signup(log, mdp).then(value => {
                 console.log('Success!', value);
+                const newUser = {email:log,uid:this.authServ.getUserID()}
+                this.users.addUser(newUser);
                 this.hideErrMessage = true;
                 this.router.navigate(['/login']);
               })
