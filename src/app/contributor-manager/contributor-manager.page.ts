@@ -10,10 +10,13 @@ import { TodoslistService } from '../services/todoslist.service';
 })
 export class ContributorManagerPage implements OnInit {
 
+  private timeBeforeMessagesDisapear = 3000;
   private hideErrMessage: boolean;
   private hideSuccessMessage: boolean;
+  private hideFailedMessage: boolean;
   private errMessage: string = "Unkown user, please try again";
   private successMessage: string = "Contributor added successfully";
+  private failedMessage: string = "This user is already a contributor";
 
   private toggleLegend: string = "Read Only";
   private toggleVal: boolean = false; // False = read only, true = read and write
@@ -23,14 +26,21 @@ export class ContributorManagerPage implements OnInit {
   ngOnInit() {
     this.hideErrMessage = true;
     this.hideSuccessMessage = true;
+    this.hideFailedMessage = true;
   }
 
   addNewContributor(mail: string){
     if(this.emailExist(mail)){
       this.hideErrMessage = true;
-      this.todolistService.addContributor(this.users.getUserId(mail), this.toggleVal);
-      this.hideSuccessMessage = false;
-      setTimeout(() => {this.hideSuccessMessage = true;}, 2000)
+      this.hideFailedMessage = true;
+      this.hideSuccessMessage = true;
+      if(this.todolistService.addContributor(this.users.getUserId(mail), this.toggleVal)){
+        this.hideSuccessMessage = false;
+        setTimeout(() => {this.hideSuccessMessage = true;}, this.timeBeforeMessagesDisapear);
+      }else{
+        this.hideFailedMessage = false;
+        setTimeout(() => {this.hideFailedMessage = true;}, this.timeBeforeMessagesDisapear);
+      }
     }else{
       this.hideErrMessage = false;
     }

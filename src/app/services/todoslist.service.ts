@@ -44,14 +44,20 @@ export class TodoslistService {
   }
 
   addContributor(uid: string, write: boolean){ // // if write == true, contributor can read and write, otherwise he can just read
-    if(write){
-      let writerIDS: Array<string> = this.listDoc.writerIDS;
-      writerIDS.push(uid);
-      this.db.collection("list").doc(this.listID).update({writerIDS});
+    let writerIDS: Array<string> = this.listDoc.writerIDS;
+    let readerIDS: Array<string> = this.listDoc.readerIDS;
+    if(writerIDS.indexOf(uid) == -1 && readerIDS.indexOf(uid) == -1){
+      if(write){
+        writerIDS.push(uid);
+        this.db.collection("list").doc(this.listID).update({writerIDS});
+        return true;
+      }else{
+        readerIDS.push(uid);
+        this.db.collection("list").doc(this.listID).update({readerIDS});
+        return true;
+      }
     }else{
-      let readerIDS: Array<string> = this.listDoc.readerIDS;
-      readerIDS.push(uid);
-      this.db.collection("list").doc(this.listID).update({readerIDS});
+      return false;
     }
   }
 
