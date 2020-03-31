@@ -47,12 +47,16 @@ export class TodoslistService {
     if(write){
       let writerIDS: Array<string> = this.listDoc.writerIDS;
       writerIDS.push(uid);
-      this.listDocObs = this.db.collection("list").doc(this.listID).update({writerIDS});
+      this.db.collection("list").doc(this.listID).update({writerIDS});
     }else{
       let readerIDS: Array<string> = this.listDoc.readerIDS;
       readerIDS.push(uid);
-      this.listDocObs = this.db.collection("list").doc(this.listID).update({readerIDS});
+      this.db.collection("list").doc(this.listID).update({readerIDS});
     }
+  }
+
+  removeContributor(){
+    // TODO
   }
 
   update(todo: Todo){

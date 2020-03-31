@@ -19,6 +19,7 @@
       </ion-item>
       <div class="ion-padding">
         <ion-text color="danger" *ngIf="!hideErrMessage">{{errMessage}}</ion-text>
+        <ion-text color="success" *ngIf="!hideSuccessMessage">{{successMessage}}</ion-text>
       </div>
       <ion-button  size="large" type="submit" [disabled]="form.invalid" expand="block">Register</ion-button>
     </div>

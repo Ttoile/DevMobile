@@ -11,7 +11,9 @@ import { TodoslistService } from '../services/todoslist.service';
 export class ContributorManagerPage implements OnInit {
 
   private hideErrMessage: boolean;
+  private hideSuccessMessage: boolean;
   private errMessage: string = "Unkown user, please try again";
+  private successMessage: string = "Contributor added successfully";
 
   private toggleLegend: string = "Read Only";
   private toggleVal: boolean = false; // False = read only, true = read and write
@@ -20,13 +22,15 @@ export class ContributorManagerPage implements OnInit {
 
   ngOnInit() {
     this.hideErrMessage = true;
+    this.hideSuccessMessage = true;
   }
 
   addNewContributor(mail: string){
     if(this.emailExist(mail)){
       this.hideErrMessage = true;
-      console.log("ADDING CONTRIBUTOR");
       this.todolistService.addContributor(this.users.getUserId(mail), this.toggleVal);
+      this.hideSuccessMessage = false;
+      setTimeout(() => {this.hideSuccessMessage = true;}, 2000)
     }else{
       this.hideErrMessage = false;
     }
