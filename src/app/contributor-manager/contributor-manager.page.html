@@ -14,8 +14,7 @@
         <ion-input  name="email" type="email" placeholder="your@email.com" ngModel required #login></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>{{toggleLegend}}</ion-label>
-        <ion-toggle (click)="toggleChange()" checked="toggleVal"></ion-toggle>
+        Read and Write<ion-toggle (click)="toggleChange()" checked="toggleVal"></ion-toggle>Read Only
       </ion-item>
       <div class="ion-padding">
         <ion-text color="danger" *ngIf="!hideErrMessage">{{errMessage}}</ion-text>

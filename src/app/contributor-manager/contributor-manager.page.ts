@@ -56,7 +56,6 @@ export class ContributorManagerPage implements OnInit {
     else
       this.toggleLegend = "Read Only";
     this.toggleVal = !this.toggleVal;
-    console.log(this.toggleVal);
   }
 
   close(){
