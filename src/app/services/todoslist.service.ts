@@ -13,6 +13,7 @@ export class TodoslistService {
 
   private todosCollection: AngularFirestoreCollection<Todo>;
   private todos: Observable<Array<Todo>>;
+  private listDocObs;
   private listDoc;
 
   constructor(private db: AngularFirestore) {}
@@ -20,7 +21,8 @@ export class TodoslistService {
   // /!\ ATTENTION /!\ ce setUp doit absolument être appelé quand on va se servir de todolist pour une nouvelle liste (exemple: dans le constructeur de todolist.page.ts)
   setUp(listeid: string){
     this.listID = listeid;
-    this.listDoc = this.db.collection("list").doc(this.listID).valueChanges();
+    this.listDocObs = this.db.collection("list").doc(this.listID).valueChanges();
+    this.listDocObs.subscribe(res => this.listDoc = res);
     this.todosCollection = this.db.collection("list").doc(listeid).collection<Todo>("todos");
     this.todos = this.todosCollection.snapshotChanges().pipe(
       map(actions => {
@@ -41,6 +43,18 @@ export class TodoslistService {
     return this.todosCollection.add(todo);
   }
 
+  addContributor(uid: string, write: boolean){ // // if write == true, contributor can read and write, otherwise he can just read
+    if(write){
+      let writerIDS: Array<string> = this.listDoc.writerIDS;
+      writerIDS.push(uid);
+      this.listDocObs = this.db.collection("list").doc(this.listID).update({writerIDS});
+    }else{
+      let readerIDS: Array<string> = this.listDoc.readerIDS;
+      readerIDS.push(uid);
+      this.listDocObs = this.db.collection("list").doc(this.listID).update({readerIDS});
+    }
+  }
+
   update(todo: Todo){
     let tmp:Todo = todo;
     tmp.isDone = !tmp.isDone;
@@ -52,7 +66,7 @@ export class TodoslistService {
   }
 
   getListDoc(){ // TODO
-    return this.listDoc;
+    return this.listDocObs;
   }
 
 }

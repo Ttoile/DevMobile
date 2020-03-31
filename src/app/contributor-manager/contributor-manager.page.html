@@ -9,10 +9,17 @@
 
 <ion-content>
   <form  #form="ngForm" (ngSubmit)="addNewContributor(login.value)">
-    <div padding>
+    <div class="ion-padding">
       <ion-item>
         <ion-input  name="email" type="email" placeholder="your@email.com" ngModel required #login></ion-input>
       </ion-item>
+      <ion-item>
+        <ion-label>{{toggleLegend}}</ion-label>
+        <ion-toggle (click)="toggleChange()" checked="toggleVal"></ion-toggle>
+      </ion-item>
+      <div class="ion-padding">
+        <ion-text color="danger" *ngIf="!hideErrMessage">{{errMessage}}</ion-text>
+      </div>
       <ion-button  size="large" type="submit" [disabled]="form.invalid" expand="block">Register</ion-button>
     </div>
   </form>

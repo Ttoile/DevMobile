@@ -11,11 +11,12 @@ import { map } from 'rxjs/operators';
 export class UsersService {
 
   private usersCorrespCollection: AngularFirestoreCollection<User>;
-  private usersCorresp: Observable<Array<User>>;
+  private usersCorrespObs: Observable<Array<User>>;
+  private usersCorresp: Array<User> = null;
 
   constructor(private db: AngularFirestore, private authServ : AuthService) {
     this.usersCorrespCollection = this.db.collection<User>('users');
-    this.usersCorresp = this.usersCorrespCollection.snapshotChanges().pipe(
+    this.usersCorrespObs = this.usersCorrespCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
           const data = a.payload.doc.data();
@@ -24,10 +25,29 @@ export class UsersService {
         });
       })
     );
+    this.usersCorrespObs.subscribe(res => this.usersCorresp = res);
   }
 
   addUser(newUser: User){
     return this.usersCorrespCollection.add(newUser);
+  }
+
+  userExist(mail: string){
+    let ret: boolean = false;
+    this.usersCorresp.forEach(val => {
+      if(val.email == mail)
+        ret = true;
+    }, this);
+    return ret;
+  }
+
+  getUserId(mail: string){
+    let ret: string;
+    this.usersCorresp.forEach(val => {
+      if(val.email == mail)
+        ret = val.uid;
+    }, this);
+    return ret;
   }
 
 }

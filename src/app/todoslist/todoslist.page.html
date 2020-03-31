@@ -19,6 +19,6 @@
   <section>
   <ion-button expand="block" [routerDirection]="'root'" [routerLink]="['/addtodo', listeID]" *ngIf="canAddTodo()">Add a New Todo</ion-button>
   <ion-button expand="block" (click)="openContributorManager()" *ngIf="isOwner()">Manage contributor</ion-button>
-  <ion-button expand="block" (click)="getTitle()">DEBUG</ion-button>
+  <!-- <ion-button expand="block" (click)="getTitle()">DEBUG</ion-button> -->
   </section>
 </ion-content>
