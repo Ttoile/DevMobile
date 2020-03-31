@@ -14,12 +14,22 @@ export class HeaderComponent implements OnInit {
   connected: boolean;
   userName: String;
 
+  canGoBack: boolean;
+
   constructor(private authServ : AuthService, private router: Router) {
   }
 
   ngOnInit() {
     this.connected = this.authServ.isConnected();
     this.userName = this.authServ.getUsername();
+    if(this.router.url !== '/listslist')
+      this.canGoBack = true;
+    else
+      this.canGoBack = false;
+  }
+
+  previousPage(){
+    this.router.navigate(['listslist']);
   }
 
 }
