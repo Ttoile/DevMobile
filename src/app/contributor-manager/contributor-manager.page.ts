@@ -21,12 +21,23 @@ export class ContributorManagerPage implements OnInit {
   private toggleLegend: string = "Read Only";
   private toggleVal: boolean = false; // False = read only, true = read and write
 
+  private contributors: Array<string>;
+
   constructor(private contributorManagerController: ModalController, private users: UsersService, private todolistService: TodoslistService) { }
 
   ngOnInit() {
     this.hideErrMessage = true;
     this.hideSuccessMessage = true;
     this.hideFailedMessage = true;
+    setTimeout(() => {
+      this.updateContributors();
+    }, 500);
+  }
+
+  updateContributors(){
+      this.contributors = this.todolistService.getContributors();
+      for(let i = 0; i<this.contributors.length; i++)
+        this.contributors[i] = this.users.getUserMail(this.contributors[i]);
   }
 
   addNewContributor(mail: string){
@@ -36,14 +47,22 @@ export class ContributorManagerPage implements OnInit {
       this.hideSuccessMessage = true;
       if(this.todolistService.addContributor(this.users.getUserId(mail), this.toggleVal)){
         this.hideSuccessMessage = false;
+        this.updateContributors();
         setTimeout(() => {this.hideSuccessMessage = true;}, this.timeBeforeMessagesDisapear);
       }else{
         this.hideFailedMessage = false;
+        this.updateContributors();
         setTimeout(() => {this.hideFailedMessage = true;}, this.timeBeforeMessagesDisapear);
       }
     }else{
       this.hideErrMessage = false;
     }
+  }
+
+  removeContributor(contrib: string){
+    // TODO
+    this.todolistService.removeContributor(this.users.getUserId(contrib));
+    this.updateContributors();
   }
 
   emailExist(email: string){

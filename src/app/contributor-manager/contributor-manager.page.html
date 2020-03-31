@@ -24,19 +24,19 @@
       <ion-button  size="large" type="submit" [disabled]="form.invalid" expand="block">Register</ion-button>
     </div>
   </form>
-  <!-- <ion-list>
-    <ion-item-sliding *ngFor="let todo of todos">
+  <ion-list>
+    <ion-title>Current contributors</ion-title>
+    <ion-item-sliding *ngFor="let contrib of contributors">
       <ion-item>
-        <ion-checkbox slot="start" checked="{{todo.isDone}}" (click)="update(todo)"></ion-checkbox>
         <ion-label>
-          <h2>{{ todo.title }}</h2>
+          <h2>{{ contrib }}</h2>
         </ion-label>
       </ion-item>
       <ion-item-options side="end">
-        <ion-item-option color="danger" (click)="delete(todo)">
+        <ion-item-option color="danger" (click)="removeContributor(contrib)">
           <ion-icon slot="top" name="trash"></ion-icon>
         </ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
-  </ion-list> -->
+  </ion-list>
 </ion-content>

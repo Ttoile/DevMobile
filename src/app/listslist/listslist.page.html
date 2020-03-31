@@ -2,7 +2,7 @@
 
 <ion-content fullscreen>
   <br>
-  <ion-title>Listes personnelles</ion-title>
+  <ion-title>My lists</ion-title>
   <ion-list>
     <ion-item-sliding *ngFor="let list of lists">
       <ion-item ion-button [routerLink]="['/todoslist', list.id]">
@@ -23,7 +23,7 @@
                 [routerLink]="'/add-list'">Add a New list</ion-button>
   </section>
   <br>
-  <ion-title>Listes visibles</ion-title>
+  <ion-title>Lists shared - read only</ion-title>
   <ion-list>
     <ion-item-sliding *ngFor="let list of listsWatchOnly">
       <ion-item ion-button [routerLink]="['/todoslist', list.id]">
@@ -34,7 +34,7 @@
     </ion-item-sliding>
   </ion-list>
   <br>
-  <ion-title>Listes partagées</ion-title>
+  <ion-title>Lists shared - read and write</ion-title>
   <ion-list>
     <ion-item-sliding *ngFor="let list of listsShared">
       <ion-item ion-button [routerLink]="['/todoslist', list.id]">

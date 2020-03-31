@@ -3,6 +3,7 @@ import { Todo, List} from '../model/todo';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AuthService } from './authentification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +47,7 @@ export class TodoslistService {
   addContributor(uid: string, write: boolean){ // // if write == true, contributor can read and write, otherwise he can just read
     let writerIDS: Array<string> = this.listDoc.writerIDS;
     let readerIDS: Array<string> = this.listDoc.readerIDS;
-    if(writerIDS.indexOf(uid) == -1 && readerIDS.indexOf(uid) == -1){
+    if(writerIDS.indexOf(uid) == -1 && readerIDS.indexOf(uid) == -1 && this.listDoc.ownerID !== uid){
       if(write){
         writerIDS.push(uid);
         this.db.collection("list").doc(this.listID).update({writerIDS});
@@ -61,8 +62,20 @@ export class TodoslistService {
     }
   }
 
-  removeContributor(){
-    // TODO
+  getContributors(){
+    return this.listDoc.writerIDS.concat(this.listDoc.readerIDS);
+  }
+
+  removeContributor(contrib: string){
+    let writerIDS: Array<string> = this.listDoc.writerIDS;
+    let readerIDS: Array<string> = this.listDoc.readerIDS;
+    if(writerIDS.indexOf(contrib) != -1){
+      writerIDS.splice(writerIDS.indexOf(contrib),1);
+      this.db.collection("list").doc(this.listID).update({writerIDS});
+    }else{
+      readerIDS.splice(readerIDS.indexOf(contrib),1);
+      this.db.collection("list").doc(this.listID).update({readerIDS});
+    }
   }
 
   update(todo: Todo){

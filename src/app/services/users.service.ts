@@ -12,7 +12,7 @@ export class UsersService {
 
   private usersCorrespCollection: AngularFirestoreCollection<User>;
   private usersCorrespObs: Observable<Array<User>>;
-  private usersCorresp: Array<User> = null;
+  private usersCorresp: Array<User>;
 
   constructor(private db: AngularFirestore, private authServ : AuthService) {
     this.usersCorrespCollection = this.db.collection<User>('users');
@@ -46,6 +46,15 @@ export class UsersService {
     this.usersCorresp.forEach(val => {
       if(val.email == mail)
         ret = val.uid;
+    }, this);
+    return ret;
+  }
+
+  getUserMail(uid: string){
+    let ret: string;
+    this.usersCorresp.forEach(val => {
+      if(val.uid == uid)
+        ret = val.email;
     }, this);
     return ret;
   }
