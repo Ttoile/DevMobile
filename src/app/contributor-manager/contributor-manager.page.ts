@@ -36,6 +36,7 @@ export class ContributorManagerPage implements OnInit {
   }
 
   updateContributorsDisplay(){
+    this.contributorsRights = [];
       let tmp: Array<string> = this.todolistService.getContributorsRead();
       for(let i = 0; i<tmp.length; i++)
         this.contributorsRights.push({contributorName:this.users.getUserMail(tmp[i]), permission: false});
@@ -83,6 +84,18 @@ export class ContributorManagerPage implements OnInit {
 
   close(){
     this.contributorManagerController.dismiss();
+  }
+
+  giveReadRights(mail: string){
+    this.removeContributor(mail);
+    this.todolistService.addContributor(this.users.getUserId(mail), false);
+    this.updateContributorsDisplay();
+  }
+
+  giveWriteRights(mail: string){
+      this.removeContributor(mail);
+      this.todolistService.addContributor(this.users.getUserId(mail), true);
+      this.updateContributorsDisplay();
   }
 
 }

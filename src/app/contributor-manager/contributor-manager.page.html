@@ -34,8 +34,8 @@
           <h2>{{ contrib.contributorName }}</h2>
         </ion-label>
         <ion-buttons slot="end">
-          <ion-button fill="solid">Read</ion-button>
-          <ion-button fill="solid">Read/Write</ion-button>
+          <ion-button (click)="giveReadRights(contrib.contributorName)" fill="solid" [color]="contrib.permission ? 'danger' : 'success'">Read</ion-button>
+          <ion-button (click)="giveWriteRights(contrib.contributorName)" fill="solid" [color]="contrib.permission ? 'success' : 'danger'">Read/Write</ion-button>
         </ion-buttons>
       </ion-item>
       <ion-item-options side="end">
