@@ -32,4 +32,8 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['listslist']);
   }
 
+  reload(){
+    window.location.reload();
+  }
+
 }
