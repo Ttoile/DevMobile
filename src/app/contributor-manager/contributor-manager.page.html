@@ -25,15 +25,21 @@
     </div>
   </form>
   <ion-list>
-    <ion-title>Current contributors</ion-title>
-    <ion-item-sliding *ngFor="let contrib of contributors">
+    <ion-toolbar>
+      <ion-title slot="start">Current contributors</ion-title><ion-title slot="end">Access rights</ion-title><br>
+    </ion-toolbar>
+    <ion-item-sliding *ngFor="let contrib of contributorsRights">
       <ion-item>
-        <ion-label>
-          <h2>{{ contrib }}</h2>
+        <ion-label slot="start">
+          <h2>{{ contrib.contributorName }}</h2>
         </ion-label>
+        <ion-buttons slot="end">
+          <ion-button fill="solid">Read</ion-button>
+          <ion-button fill="solid">Read/Write</ion-button>
+        </ion-buttons>
       </ion-item>
       <ion-item-options side="end">
-        <ion-item-option color="danger" (click)="removeContributor(contrib)">
+        <ion-item-option color="danger" (click)="removeContributor(contrib.contributorName)">
           <ion-icon slot="top" name="trash"></ion-icon>
         </ion-item-option>
       </ion-item-options>

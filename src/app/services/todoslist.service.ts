@@ -62,6 +62,14 @@ export class TodoslistService {
     }
   }
 
+  getContributorsRead(){
+    return this.listDoc.readerIDS;
+  }
+
+  getContributorsWrite(){
+    return this.listDoc.writerIDS;
+  }
+
   getContributors(){
     return this.listDoc.writerIDS.concat(this.listDoc.readerIDS);
   }
@@ -88,7 +96,7 @@ export class TodoslistService {
     return this.todosCollection.doc(todo.id).delete();
   }
 
-  getListDoc(){ // TODO
+  getListDoc(){
     return this.listDocObs;
   }
 

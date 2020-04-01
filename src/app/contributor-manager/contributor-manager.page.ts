@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { UsersService } from '../services/users.service';
 import { TodoslistService } from '../services/todoslist.service';
+import { ContributorRights } from '../model/todo';
 
 @Component({
   selector: 'app-contributor-manager',
@@ -21,7 +22,7 @@ export class ContributorManagerPage implements OnInit {
   private toggleLegend: string = "Read Only";
   private toggleVal: boolean = false; // False = read only, true = read and write
 
-  private contributors: Array<string>;
+  private contributorsRights: Array<ContributorRights> = [];
 
   constructor(private contributorManagerController: ModalController, private users: UsersService, private todolistService: TodoslistService) { }
 
@@ -30,14 +31,18 @@ export class ContributorManagerPage implements OnInit {
     this.hideSuccessMessage = true;
     this.hideFailedMessage = true;
     setTimeout(() => {
-      this.updateContributors();
+      this.updateContributorsDisplay();
     }, 500);
   }
 
-  updateContributors(){
-      this.contributors = this.todolistService.getContributors();
-      for(let i = 0; i<this.contributors.length; i++)
-        this.contributors[i] = this.users.getUserMail(this.contributors[i]);
+  updateContributorsDisplay(){
+      let tmp: Array<string> = this.todolistService.getContributorsRead();
+      for(let i = 0; i<tmp.length; i++)
+        this.contributorsRights.push({contributorName:this.users.getUserMail(tmp[i]), permission: false});
+      tmp = this.todolistService.getContributorsWrite();
+      for(let i = 0; i<tmp.length; i++)
+        this.contributorsRights.push({contributorName:this.users.getUserMail(tmp[i]), permission: true});
+      console.log(this.contributorsRights);
   }
 
   addNewContributor(mail: string){
@@ -47,11 +52,11 @@ export class ContributorManagerPage implements OnInit {
       this.hideSuccessMessage = true;
       if(this.todolistService.addContributor(this.users.getUserId(mail), this.toggleVal)){
         this.hideSuccessMessage = false;
-        this.updateContributors();
+        this.updateContributorsDisplay();
         setTimeout(() => {this.hideSuccessMessage = true;}, this.timeBeforeMessagesDisapear);
       }else{
         this.hideFailedMessage = false;
-        this.updateContributors();
+        this.updateContributorsDisplay();
         setTimeout(() => {this.hideFailedMessage = true;}, this.timeBeforeMessagesDisapear);
       }
     }else{
@@ -60,9 +65,8 @@ export class ContributorManagerPage implements OnInit {
   }
 
   removeContributor(contrib: string){
-    // TODO
     this.todolistService.removeContributor(this.users.getUserId(contrib));
-    this.updateContributors();
+    this.updateContributorsDisplay();
   }
 
   emailExist(email: string){

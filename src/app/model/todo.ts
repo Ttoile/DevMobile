@@ -24,3 +24,8 @@ export interface User{
   email: string;
   uid: string;
 }
+
+export interface ContributorRights{
+  contributorName: string;
+  permission: boolean; // false = read only et true = Read and write
+}
