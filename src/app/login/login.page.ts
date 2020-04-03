@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../services/authentification.service';
 import {Router} from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import {Router} from '@angular/router';
 export class LoginPage implements OnInit {
   private hideErrMessage: boolean;
   private errMessage: String;
-  constructor(private authServ : AuthService, private router: Router) {
+  constructor(private authServ : AuthService, private router: Router, private navCtrl: NavController) {
   }
 
   ngOnInit() {

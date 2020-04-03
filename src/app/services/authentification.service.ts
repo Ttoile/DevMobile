@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 
 import * as firebase from 'firebase/app';
 import {Router} from '@angular/router';
@@ -7,6 +7,9 @@ import {Router} from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
+
+  @Output() getLoggedInName: EventEmitter<any> = new EventEmitter();
+
   constructor(private router: Router) {
   }
 
@@ -32,7 +35,8 @@ export class AuthService {
   login(email: string, password: string): Promise<firebase.auth.UserCredential> {
     return firebase
         .auth()
-        .signInWithEmailAndPassword(email, password);
+        .signInWithEmailAndPassword(email, password)
+        .finally(()=>{this.getLoggedInName.emit(this.getUsername())});
   }
 
   logout() {

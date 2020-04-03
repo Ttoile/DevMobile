@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {List, Todo} from '../model/todo';
 import {TodoslistService} from '../services/todoslist.service';
 import {CollecList} from '../services/collec-list.service';
+import { AuthService } from '../services/authentification.service';
 
 @Component({
   selector: 'app-listslist',
@@ -14,9 +15,10 @@ export class ListslistPage implements OnInit {
   private listsWatchOnly: Array<List>;
   private listsShared: Array<List>;
 
-  constructor(private listService: CollecList) {}
+  constructor(private listService: CollecList, private auth: AuthService) {}
 
   ngOnInit(): void {
+    // this.auth.getLoggedInName.subscribe(event => {console.log("RECHARGE");this.update()})
     this.listService.getLists().subscribe(res => this.lists = res);
     this.listService.getListsWatchOnly().subscribe(res => this.listsWatchOnly = res);
     this.listService.getListsShared().subscribe(res => this.listsShared = res);

@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.authServ.getLoggedInName.subscribe(event => {this.userName = event});
     this.connected = this.authServ.isConnected();
     this.userName = this.authServ.getUsername();
     if(this.router.url !== '/listslist')
@@ -34,6 +35,10 @@ export class HeaderComponent implements OnInit {
 
   reload(){
     window.location.reload();
+  }
+
+  logout(){
+    this.authServ.logout();
   }
 
 }
