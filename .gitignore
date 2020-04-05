@@ -31,3 +31,4 @@ npm-debug.log*
 /www
 
 my-release-key.keystore
+my-build.sh

@@ -1,12 +1,12 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start" *ngIf="canGoBack">
-      <ion-button (click)="previousPage()">  <ion-icon name="arrow-dropleft"></ion-icon></ion-button>
+      <ion-button (click)="previousPage()"><ion-icon name="arrow-dropleft"></ion-icon></ion-button>
     </ion-buttons>
-    <ion-title *ngIf="pc" slot="start">
+    <ion-title *ngIf="pc">
       {{this.title}}
     </ion-title>
-    <ion-title *ngIf="!pc" slot="start" size="small">
+    <ion-title *ngIf="!pc" size="small">
       {{this.title}}
     </ion-title>
     <!-- <ion-buttons *ngIf="connected">
@@ -14,7 +14,7 @@
     </ion-buttons> -->
     <ion-buttons slot="end" *ngIf="connected">
       {{this.userName}}
-      <ion-button fill="solid" color="primary" (click)="this.logout()">Disconnect</ion-button>
+      <ion-button fill="solid" color="primary" (click)="this.logout()"><ion-icon name="log-out"></ion-icon></ion-button>
     </ion-buttons>
     <ion-buttons slot="end" *ngIf="!connected">
       <ion-button fill="solid" color="primary" (click)="this.router.navigate(['/login'])">Login</ion-button>

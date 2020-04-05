@@ -17,9 +17,11 @@ export class ListslistPage implements OnInit {
   constructor(private listService: CollecList, private auth: AuthService) {
     this.listService.getDatabaseReloaded.subscribe(() => {this.getListsFromService()});
     this.getListsFromService();
+    console.log("Passage constr");
   }
 
   ngOnInit(): void {
+    console.log("PAssage init");
   }
 
   getListsFromService(){

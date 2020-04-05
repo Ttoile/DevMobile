@@ -26,23 +26,19 @@
   </form>
   <ion-list>
     <ion-toolbar>
-      <ion-title slot="start">Current contributors</ion-title><ion-title slot="end">Access rights</ion-title><br>
+      <ion-title slot="start" size="small">Contributors</ion-title><ion-title slot="end" size="small">Access rights</ion-title><br>
     </ion-toolbar>
     <ion-item-sliding *ngFor="let contrib of contributorsRights">
       <ion-item>
-        <ion-label slot="start">
+        <ion-label>
           <h2>{{ contrib.contributorName }}</h2>
         </ion-label>
-        <ion-buttons slot="end">
-          <ion-button (click)="giveReadRights(contrib.contributorName)" fill="solid" [color]="contrib.permission ? 'danger' : 'success'">Read</ion-button>
-          <ion-button (click)="giveWriteRights(contrib.contributorName)" fill="solid" [color]="contrib.permission ? 'success' : 'danger'">Read/Write</ion-button>
+        <ion-buttons >
+          <ion-button (click)="giveReadRights(contrib.contributorName)" fill="solid" size="default" [color]="contrib.permission ? 'danger' : 'success'">Read</ion-button>
+          <ion-button (click)="giveWriteRights(contrib.contributorName)" fill="solid" size="default" [color]="contrib.permission ? 'success' : 'danger'">Read/Write</ion-button>
+          <ion-button (click)="removeContributor(contrib.contributorName)" fill="solid" size="default" [color]="'danger'"><ion-icon name="trash"></ion-icon></ion-button>
         </ion-buttons>
       </ion-item>
-      <ion-item-options side="end">
-        <ion-item-option color="danger" (click)="removeContributor(contrib.contributorName)">
-          <ion-icon slot="top" name="trash"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
     </ion-item-sliding>
   </ion-list>
 </ion-content>

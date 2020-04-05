@@ -43,7 +43,6 @@ export class ContributorManagerPage implements OnInit {
       tmp = this.todolistService.getContributorsWrite();
       for(let i = 0; i<tmp.length; i++)
         this.contributorsRights.push({contributorName:this.users.getUserMail(tmp[i]), permission: true});
-      console.log(this.contributorsRights);
   }
 
   addNewContributor(mail: string){

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Todo } from '../model/todo';
 import { TodoslistService } from '../services/todoslist.service';
 import {Location} from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-addtodo',
@@ -15,11 +14,9 @@ export class AddtodoPage implements OnInit {
   title: string;
 
   constructor(private listService: TodoslistService,
-    private location: Location,
-    private route: ActivatedRoute) { }
+    private location: Location) { }
 
   ngOnInit() {
-    this.listeID = this.route.snapshot.paramMap.get('liste');
   }
 
   addTodo(){
