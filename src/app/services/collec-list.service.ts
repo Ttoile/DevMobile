@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import {List, Todo, uid} from '../model/todo';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
@@ -18,10 +18,17 @@ export class CollecList{
   private listsWatchOnly: Observable<Array<List>>;
   private listsShared: Observable<Array<List>>;
 
+  @Output() getDatabaseReloaded: EventEmitter<any> = new EventEmitter();
+
   constructor(private db: AngularFirestore, private authServ : AuthService) {
-    this.listCollection = db.collection<List>('list', ref=>ref.where('ownerID','==',this.authServ.getUserID()));
-    this.listWatchOnlyCollection = db.collection<List>('list', ref=>ref.where('readerIDS','array-contains',this.authServ.getUserID()));
-    this.listSharedCollection = db.collection<List>('list', ref=>ref.where('writerIDS','array-contains',this.authServ.getUserID()));
+    this.authServ.getLoggedInName.subscribe(event => {this.getDatabase(); console.log("getdatabase")});
+    this.getDatabase();
+  }
+
+  getDatabase(){
+    this.listCollection = this.db.collection<List>('list', ref=>ref.where('ownerID','==',this.authServ.getUserID()));
+    this.listWatchOnlyCollection = this.db.collection<List>('list', ref=>ref.where('readerIDS','array-contains',this.authServ.getUserID()));
+    this.listSharedCollection = this.db.collection<List>('list', ref=>ref.where('writerIDS','array-contains',this.authServ.getUserID()));
 
     this.lists = this.listCollection.snapshotChanges().pipe(
         map(actions => {
@@ -50,6 +57,7 @@ export class CollecList{
           });
         })
     );
+    this.getDatabaseReloaded.emit("done");
   }
 
   getLists(): Observable<Array<List>> {

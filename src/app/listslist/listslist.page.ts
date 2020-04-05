@@ -15,10 +15,15 @@ export class ListslistPage implements OnInit {
   private listsWatchOnly: Array<List>;
   private listsShared: Array<List>;
 
-  constructor(private listService: CollecList, private auth: AuthService) {}
+  constructor(private listService: CollecList, private auth: AuthService) {
+    this.listService.getDatabaseReloaded.subscribe(() => {this.getListsFromService()});
+    this.getListsFromService();
+  }
 
   ngOnInit(): void {
-    // this.auth.getLoggedInName.subscribe(event => {console.log("RECHARGE");this.update()})
+  }
+
+  getListsFromService(){
     this.listService.getLists().subscribe(res => this.lists = res);
     this.listService.getListsWatchOnly().subscribe(res => this.listsWatchOnly = res);
     this.listService.getListsShared().subscribe(res => this.listsShared = res);
