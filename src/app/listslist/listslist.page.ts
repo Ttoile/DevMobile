@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {List, Todo} from '../model/todo';
-import {TodoslistService} from '../services/todoslist.service';
+import {List} from '../model/todo';
 import {CollecList} from '../services/collec-list.service';
 import { AuthService } from '../services/authentification.service';
 

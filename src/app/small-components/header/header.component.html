@@ -1,14 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start" *ngIf="canGoBack && connected">
+    <ion-buttons slot="start" *ngIf="canGoBack">
       <ion-button (click)="previousPage()">BACK</ion-button>
     </ion-buttons>
     <ion-title slot="start">
       {{this.title}}
     </ion-title>
-    <ion-buttons *ngIf="connected">
+    <!-- <ion-buttons *ngIf="connected">
       <ion-button (click)="this.reload()">Refresh</ion-button>
-    </ion-buttons>
+    </ion-buttons> -->
     <ion-buttons slot="end" *ngIf="connected">
       {{this.userName}}
       <ion-button fill="solid" color="primary" (click)="this.logout()">Disconnect</ion-button>

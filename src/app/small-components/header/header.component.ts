@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
     this.authServ.getLoggedInName.subscribe(event => {this.userName = event});
     this.connected = this.authServ.isConnected();
     this.userName = this.authServ.getUsername();
-    if(this.router.url !== '/listslist')
+    if(this.router.url !== '/listslist' && this.router.url !== '/login')
       this.canGoBack = true;
     else
       this.canGoBack = false;
