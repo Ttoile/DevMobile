@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from 'src/app/services/authentification.service';
 import { Router } from '@angular/router';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-header',
@@ -16,10 +17,13 @@ export class HeaderComponent implements OnInit {
 
   canGoBack: boolean;
 
-  constructor(private authServ : AuthService, private router: Router) {
+  pc: boolean;
+
+  constructor(private authServ : AuthService, private router: Router, private platform: Platform) {
   }
 
   ngOnInit() {
+    this.pc = this.platform.is("desktop");
     this.authServ.getLoggedInName.subscribe(event => {this.userName = event});
     this.connected = this.authServ.isConnected();
     this.userName = this.authServ.getUsername();

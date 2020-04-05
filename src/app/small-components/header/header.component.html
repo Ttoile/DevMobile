@@ -1,9 +1,12 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start" *ngIf="canGoBack">
-      <ion-button (click)="previousPage()">BACK</ion-button>
+      <ion-button (click)="previousPage()">  <ion-icon name="arrow-dropleft"></ion-icon></ion-button>
     </ion-buttons>
-    <ion-title slot="start">
+    <ion-title *ngIf="pc" slot="start">
+      {{this.title}}
+    </ion-title>
+    <ion-title *ngIf="!pc" slot="start" size="small">
       {{this.title}}
     </ion-title>
     <!-- <ion-buttons *ngIf="connected">
