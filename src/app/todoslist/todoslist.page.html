@@ -4,7 +4,7 @@
   <ion-list>
     <ion-item-sliding *ngFor="let todo of todos">
       <ion-item>
-        <ion-checkbox slot="start" checked="{{todo.isDone}}" (click)="update(todo)"></ion-checkbox>
+        <ion-checkbox slot="start" checked="{{todo.isDone}}" [disabled]="canAddTodo()?false:true" (click)="update(todo)"></ion-checkbox>
         <ion-label>
           <h2>{{ todo.title }}</h2>
         </ion-label>
