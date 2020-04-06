@@ -4,7 +4,7 @@
   <ion-list>
     <ion-item-sliding *ngFor="let todo of todos">
       <ion-item>
-        <ion-checkbox slot="start" checked="{{todo.isDone}}" (click)="update(todo)"></ion-checkbox>
+        <ion-checkbox slot="start" checked="{{todo.isDone}}" [disabled]="canAddTodo()?false:true" (click)="update(todo)"></ion-checkbox>
         <ion-label>
           <h2>{{ todo.title }}</h2>
         </ion-label>
@@ -17,7 +17,7 @@
     </ion-item-sliding>
   </ion-list>
   <section>
-  <ion-button expand="block" [routerLink]="['/addtodo', listeID]" *ngIf="canAddTodo()">Add a New Todo</ion-button>
+  <ion-button expand="block" [routerLink]="['/addtodo']" *ngIf="canAddTodo()">Add a New Todo</ion-button>
   <ion-button expand="block" (click)="openContributorManager()" *ngIf="isOwner()">Manage contributor</ion-button>
   <!-- <ion-button expand="block" (click)="getTitle()">DEBUG</ion-button> -->
   </section>

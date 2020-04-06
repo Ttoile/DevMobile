@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { AddtodoPageRoutingModule } from './addtodo-routing.module';
 
 import { AddtodoPage } from './addtodo.page';
+import { HeaderModule } from '../small-components/header/header.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AddtodoPageRoutingModule
+    AddtodoPageRoutingModule,
+    HeaderModule
   ],
   declarations: [AddtodoPage]
 })

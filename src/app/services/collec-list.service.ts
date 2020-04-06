@@ -21,7 +21,7 @@ export class CollecList{
   @Output() getDatabaseReloaded: EventEmitter<any> = new EventEmitter();
 
   constructor(private db: AngularFirestore, private authServ : AuthService) {
-    this.authServ.getLoggedInName.subscribe(event => {this.getDatabase(); console.log("getdatabase")});
+    this.authServ.getLoggedInName.subscribe(event => {this.getDatabase();});
     this.getDatabase();
   }
 
@@ -73,7 +73,9 @@ export class CollecList{
   }
 
   addList(list: List) {
-    return this.listCollection.add(list);
+    let ret = this.listCollection.add(list);
+    this.getDatabase();
+    return ret;
   }
 
   delete(list: List){
