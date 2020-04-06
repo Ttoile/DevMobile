@@ -17,7 +17,6 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import * as firebase from 'firebase';
-import { ServiceWorkerModule } from '@angular/service-worker';
 import { MessagingService} from './services/messaging.service';
 import {AsyncPipe} from '@angular/common';
 
