@@ -28,18 +28,11 @@
           <div padding>
             <ion-text color="danger" *ngIf="!hideErrMessage">{{errMessage}}</ion-text>
           </div>
+          <div padding>
+            <ion-text color="success" *ngIf="!hideSuccessMessage">{{successMessage}}</ion-text>
+          </div>
         </ion-col>
       </ion-row>
     </ion-grid>
   </form>
 </ion-content>
-
-
-
-<!-- <ion-content>
-  <ion-input #login type="text">Adresse Mail</ion-input>
-  <ion-input #confirmLogin type="text">Confirmation adresse mail</ion-input>
-  <ion-input #motDePasse type="text">Mot de passe</ion-input>
-  <ion-input #confirmMotDePasse type="text">Confirmation mot de passe</ion-input>
-  <ion-button (click)=signUp(login.value,motDePasse.value,confirmLogin.value,confirmMotDePasse.value)>Sign-Up</ion-button>
-</ion-content> -->

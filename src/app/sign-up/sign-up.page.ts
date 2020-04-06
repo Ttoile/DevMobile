@@ -11,11 +11,16 @@ import { UsersService } from '../services/users.service';
 export class SignUpPage implements OnInit {
   private hideErrMessage:boolean;
   private errMessage:String;
+  private hideSuccessMessage:boolean;
+  private successMessage:string;
+  private timeBeforeMessagesDisapear = 5000;
   constructor(private authServ:AuthService, private users: UsersService, private router: Router) { }
 
   ngOnInit() {
     this.hideErrMessage = true;
+    this.hideSuccessMessage = true;
     this.errMessage = "";
+    this.successMessage = "A verification email has been sent. You're going to be redirected in "+this.timeBeforeMessagesDisapear/1000 + "s.";
   }
 
   signUp(log: string, mdp: string, conflog: string, confmdp: string){
@@ -30,11 +35,12 @@ export class SignUpPage implements OnInit {
       this.errMessage = "Les mots de passe doivent correspondrent";
     }else{
       this.authServ.signup(log, mdp).then(value => {
-                console.log('Success!', value);
+                this.authServ.sendEmailVerif();
                 const newUser = {email:log,uid:this.authServ.getUserID()}
                 this.users.addUser(newUser);
                 this.hideErrMessage = true;
-                this.router.navigate(['/login']);
+                this.hideSuccessMessage =false;
+                setTimeout(() => {this.hideSuccessMessage = true; this.router.navigate(['/login'])}, this.timeBeforeMessagesDisapear);
               })
               .catch(err => {
                 this.hideErrMessage = false;

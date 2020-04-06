@@ -17,13 +17,18 @@
             <ion-text color="danger" *ngIf="!hideErrMessage">{{errMessage}}</ion-text>
           </div>
           <div padding>
-            <ion-button  size="large" type="submit" [disabled]="form.invalid" expand="block"  (click)="logIn(login.value,motDePasse.value)">Log in</ion-button>
+            <ion-text color="warning" *ngIf="!hideMailVerifMessage">Please verify your email address before you can connect.</ion-text><br>
+            <ion-text color="warning" *ngIf="!hideMailVerifMessage" (click)="resendVerif(login.value, motDePasse.value)">I didn't get the mail.</ion-text>
+            <ion-text color="warning" *ngIf="!hideMailResent">A new email as been sent.</ion-text>
           </div>
           <div padding>
-            <ion-button  size="large" type="signin" expand="block" routerLink="/password-recover">Recover Password</ion-button>
+            <ion-button  size="large" type="submit" [disabled]="form.invalid" expand="block" (click)="logIn(login.value,motDePasse.value)">Log in</ion-button>
           </div>
           <div padding>
-            <ion-button  size="large" type="signin" expand="block" routerLink="/sign-up">Sign up</ion-button>
+            <ion-button  size="large" expand="block" routerLink="/password-recover">Recover Password</ion-button>
+          </div>
+          <div padding>
+            <ion-button  size="large" expand="block" routerLink="/sign-up">Sign up</ion-button>
           </div>
         </ion-col>
       </ion-row>

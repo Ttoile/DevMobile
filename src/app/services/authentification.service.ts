@@ -29,7 +29,7 @@ export class AuthService {
   signup(email: string, password: string): Promise<firebase.auth.UserCredential> {
     return firebase
         .auth()
-        .createUserWithEmailAndPassword(email, password)
+        .createUserWithEmailAndPassword(email, password);
   }
 
   login(email: string, password: string): Promise<firebase.auth.UserCredential> {
@@ -43,7 +43,8 @@ export class AuthService {
     firebase
         .auth()
         .signOut();
-    this.router.navigate(['/login']);
+    if(this.router.url !== '/login')
+      this.router.navigate(['/login']);
   }
 
   getUsername(){
@@ -60,6 +61,10 @@ export class AuthService {
 
   resetPassword(email: string){
     return firebase.auth().sendPasswordResetEmail(email);
+  }
+
+  sendEmailVerif(){
+    return firebase.auth().currentUser.sendEmailVerification();
   }
 
 }
