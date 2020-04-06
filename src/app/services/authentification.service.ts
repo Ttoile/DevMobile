@@ -58,4 +58,8 @@ export class AuthService {
     return firebase.auth().currentUser?true:false;
   }
 
+  resetPassword(email: string){
+    return firebase.auth().sendPasswordResetEmail(email);
+  }
+
 }

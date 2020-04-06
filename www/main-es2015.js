@@ -441,7 +441,7 @@ module.exports = webpackAsyncContext;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "{{ message | async | json }}\n\n<ion-app>\n  <ion-router-outlet></ion-router-outlet>\n</ion-app>\n"
+module.exports = "<ion-app>\n  <ion-router-outlet></ion-router-outlet>\n</ion-app>\n"
 
 /***/ }),
 
@@ -539,26 +539,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/ngx/index.js");
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
-/* harmony import */ var _services_messaging_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./services/messaging.service */ "./src/app/services/messaging.service.ts");
-
 
 
 
 
 
 let AppComponent = class AppComponent {
-    constructor(platform, splashScreen, statusBar, messagingService) {
+    constructor(platform, splashScreen, statusBar) {
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
-        this.messagingService = messagingService;
-        this.title = 'push-notification';
         this.initializeApp();
-    }
-    ngOnInit() {
-        this.messagingService.requestPermission();
-        this.messagingService.receiveMessage();
-        this.message = this.messagingService.currentMessage;
     }
     initializeApp() {
         this.platform.ready().then(() => {
@@ -570,8 +561,7 @@ let AppComponent = class AppComponent {
 AppComponent.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"] },
     { type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"] },
-    { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] },
-    { type: _services_messaging_service__WEBPACK_IMPORTED_MODULE_5__["MessagingService"] }
+    { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] }
 ];
 AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -581,8 +571,7 @@ AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"],
         _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"],
-        _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"],
-        _services_messaging_service__WEBPACK_IMPORTED_MODULE_5__["MessagingService"]])
+        _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"]])
 ], AppComponent);
 
 
@@ -613,13 +602,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../environments/environment */ "./src/environments/environment.ts");
 /* harmony import */ var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! angularfire2/firestore */ "./node_modules/angularfire2/firestore/index.js");
 /* harmony import */ var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(angularfire2_firestore__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/fire/messaging */ "./node_modules/@angular/fire/messaging/es2015/index.js");
-/* harmony import */ var _angular_fire_database__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/fire/database */ "./node_modules/@angular/fire/database/es2015/index.js");
-/* harmony import */ var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/fire/auth */ "./node_modules/@angular/fire/auth/es2015/index.js");
-/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! firebase/app */ "./node_modules/firebase/app/dist/index.cjs.js");
-/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(firebase_app__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var _services_messaging_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./services/messaging.service */ "./src/app/services/messaging.service.ts");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+/* harmony import */ var firebase__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! firebase */ "./node_modules/firebase/dist/index.cjs.js");
+/* harmony import */ var firebase__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(firebase__WEBPACK_IMPORTED_MODULE_12__);
 
 
 
@@ -633,16 +617,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-firebase_app__WEBPACK_IMPORTED_MODULE_15__["initializeApp"](_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].fbconfig);
-// Retrieve Firebase Messaging object.
-const messaging = firebase_app__WEBPACK_IMPORTED_MODULE_15__["messaging"]();
-// Add the public key generated from the console here.
-messaging.usePublicVapidKey("BLbeh6S0TIoZSJL91FGShfDDM4_WVA8tUFA7u2imLHd3MnJm9pZDOtGrJJk0n0gqAYG2HEFqNn1l-J48GcmyMfA");
+firebase__WEBPACK_IMPORTED_MODULE_12__["initializeApp"](_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].fbconfig);
 let AppModule = class AppModule {
 };
 AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -651,15 +626,10 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         entryComponents: [],
         imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"],
             angularfire2__WEBPACK_IMPORTED_MODULE_9__["AngularFireModule"].initializeApp(_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].fbconfig),
-            angularfire2_firestore__WEBPACK_IMPORTED_MODULE_11__["AngularFirestoreModule"],
-            _angular_fire_database__WEBPACK_IMPORTED_MODULE_13__["AngularFireDatabaseModule"],
-            _angular_fire_auth__WEBPACK_IMPORTED_MODULE_14__["AngularFireAuthModule"],
-            _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_12__["AngularFireMessagingModule"]],
+            angularfire2_firestore__WEBPACK_IMPORTED_MODULE_11__["AngularFirestoreModule"]],
         providers: [
             _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"],
-            _services_messaging_service__WEBPACK_IMPORTED_MODULE_16__["MessagingService"],
             _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"],
-            _angular_common__WEBPACK_IMPORTED_MODULE_17__["AsyncPipe"],
             { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"] }
         ],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
@@ -729,59 +699,6 @@ AuthguardGuard = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
-/***/ "./src/app/services/messaging.service.ts":
-/*!***********************************************!*\
-  !*** ./src/app/services/messaging.service.ts ***!
-  \***********************************************/
-/*! exports provided: MessagingService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MessagingService", function() { return MessagingService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/fire/messaging */ "./node_modules/@angular/fire/messaging/es2015/index.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
-
-
-
-
-let MessagingService = class MessagingService {
-    constructor(angularFireMessaging) {
-        this.angularFireMessaging = angularFireMessaging;
-        this.currentMessage = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](null);
-        this.angularFireMessaging.messaging.subscribe((_messaging) => {
-            _messaging.onMessage = _messaging.onMessage.bind(_messaging);
-            _messaging.onTokenRefresh = _messaging.onTokenRefresh.bind(_messaging);
-        });
-    }
-    requestPermission() {
-        this.angularFireMessaging.requestToken.subscribe((token) => {
-            console.log(token);
-        }, (err) => {
-            console.error('Unable to get permission to notify.', err);
-        });
-    }
-    receiveMessage() {
-        this.angularFireMessaging.messages.subscribe((payload) => {
-            console.log("new message received. ", payload);
-            this.currentMessage.next(payload);
-        });
-    }
-};
-MessagingService.ctorParameters = () => [
-    { type: _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_2__["AngularFireMessaging"] }
-];
-MessagingService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_fire_messaging__WEBPACK_IMPORTED_MODULE_2__["AngularFireMessaging"]])
-], MessagingService);
-
-
-
-/***/ }),
-
 /***/ "./src/environments/environment.ts":
 /*!*****************************************!*\
   !*** ./src/environments/environment.ts ***!
@@ -804,8 +721,8 @@ const environment = {
         projectId: "test-a18d4",
         storageBucket: "test-a18d4.appspot.com",
         messagingSenderId: "1088644142824",
-        appId: "1:1088644142824:web:62c81d3c57d4698962db5d",
-        measurementId: "G-Q059P85G42"
+        appId: "1:1088644142824:web:e74e1eb1d9fd8a4162db5d",
+        measurementId: "G-YH85YGJZ8H"
     }
 };
 /*

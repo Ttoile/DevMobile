@@ -36,6 +36,10 @@ const routes: Routes = [
     path: 'contributor-manager',
     loadChildren: () => import('./contributor-manager/contributor-manager.module').then( m => m.ContributorManagerPageModule)
   },
+  {
+    path: 'password-recover',
+    loadChildren: () => import('./password-recover/password-recover.module').then( m => m.PasswordRecoverPageModule)
+  },
 ];
 
 @NgModule({
