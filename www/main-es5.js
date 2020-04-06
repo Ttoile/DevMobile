@@ -627,8 +627,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/fire/messaging */ "./node_modules/@angular/fire/messaging/index.js");
 /* harmony import */ var _angular_fire_database__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/fire/database */ "./node_modules/@angular/fire/database/index.js");
 /* harmony import */ var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/fire/auth */ "./node_modules/@angular/fire/auth/index.js");
-/* harmony import */ var firebase__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! firebase */ "./node_modules/firebase/dist/index.cjs.js");
-/* harmony import */ var firebase__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(firebase__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! firebase/app */ "./node_modules/firebase/app/dist/index.cjs.js");
+/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(firebase_app__WEBPACK_IMPORTED_MODULE_15__);
 /* harmony import */ var _services_messaging_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./services/messaging.service */ "./src/app/services/messaging.service.ts");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 
@@ -649,9 +649,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-firebase__WEBPACK_IMPORTED_MODULE_15__["initializeApp"](_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].fbconfig);
+firebase_app__WEBPACK_IMPORTED_MODULE_15__["initializeApp"](_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].fbconfig);
 // Retrieve Firebase Messaging object.
-var messaging = firebase__WEBPACK_IMPORTED_MODULE_15__["messaging"]();
+var messaging = firebase_app__WEBPACK_IMPORTED_MODULE_15__["messaging"]();
 // Add the public key generated from the console here.
 messaging.usePublicVapidKey("BLbeh6S0TIoZSJL91FGShfDDM4_WVA8tUFA7u2imLHd3MnJm9pZDOtGrJJk0n0gqAYG2HEFqNn1l-J48GcmyMfA");
 var AppModule = /** @class */ (function () {
