@@ -7,7 +7,18 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-header [title]=\"'Sign up'\"></app-header>\n\n<ion-content >\n  <form  #form=\"ngForm\" (ngSubmit)=\"signUp(login.value,motDePasse.value,confirmLogin.value,confirmMotDePasse.value)\">\n    <ion-grid>\n      <ion-row color=\"primary\" justify-content-center>\n        <ion-col align-self-center size-md=\"6\" size-lg=\"5\" size-xs=\"12\">\n          <div text-center>\n            <h3>Create your account!</h3>\n          </div>\n          <div padding>\n            <ion-item>\n              <ion-input  name=\"email\" type=\"email\" placeholder=\"your@email.com\" ngModel required #login></ion-input>\n            </ion-item>\n            <ion-item>\n              <ion-input name=\"confirmemail\" type=\"email\" placeholder=\"your@email.com again\" ngModel required #confirmLogin></ion-input>\n            </ion-item>\n            <ion-item>\n              <ion-input name=\"password\" type=\"password\" placeholder=\"Password\" ngModel required #motDePasse></ion-input>\n            </ion-item>\n            <ion-item>\n              <ion-input name=\"confirm\" type=\"password\" placeholder=\"Password again\" ngModel required #confirmMotDePasse></ion-input>\n            </ion-item>\n          </div>\n          <div padding>\n            <ion-button  size=\"large\" type=\"submit\" [disabled]=\"form.invalid\" expand=\"block\">Register</ion-button>\n          </div>\n          <div padding>\n            <ion-text color=\"danger\" *ngIf=\"!hideErrMessage\">{{errMessage}}</ion-text>\n          </div>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n  </form>\n</ion-content>\n\n\n\n<!-- <ion-content>\n  <ion-input #login type=\"text\">Adresse Mail</ion-input>\n  <ion-input #confirmLogin type=\"text\">Confirmation adresse mail</ion-input>\n  <ion-input #motDePasse type=\"text\">Mot de passe</ion-input>\n  <ion-input #confirmMotDePasse type=\"text\">Confirmation mot de passe</ion-input>\n  <ion-button (click)=signUp(login.value,motDePasse.value,confirmLogin.value,confirmMotDePasse.value)>Sign-Up</ion-button>\n</ion-content> -->\n"
+module.exports = "<app-header [title]=\"'Sign up'\"></app-header>\n\n<ion-content >\n  <form  #form=\"ngForm\" (ngSubmit)=\"signUp(login.value,motDePasse.value,confirmLogin.value,confirmMotDePasse.value)\">\n    <ion-grid>\n      <ion-row color=\"primary\" justify-content-center>\n        <ion-col align-self-center size-md=\"6\" size-lg=\"5\" size-xs=\"12\">\n          <div text-center>\n            <h3>Create your account!</h3>\n          </div>\n          <div padding>\n            <ion-item>\n              <ion-input  name=\"email\" type=\"email\" placeholder=\"your@email.com\" ngModel required #login></ion-input>\n            </ion-item>\n            <ion-item>\n              <ion-input name=\"confirmemail\" type=\"email\" placeholder=\"your@email.com again\" ngModel required #confirmLogin></ion-input>\n            </ion-item>\n            <ion-item>\n              <ion-input name=\"password\" type=\"password\" placeholder=\"Password\" ngModel required #motDePasse></ion-input>\n            </ion-item>\n            <ion-item>\n              <ion-input name=\"confirm\" type=\"password\" placeholder=\"Password again\" ngModel required #confirmMotDePasse></ion-input>\n            </ion-item>\n          </div>\n          <div padding>\n            <ion-button  size=\"large\" type=\"submit\" [disabled]=\"form.invalid\" expand=\"block\">Register</ion-button>\n          </div>\n          <div padding>\n            <ion-text color=\"danger\" *ngIf=\"!hideErrMessage\">{{errMessage}}</ion-text>\n          </div>\n          <div padding>\n            <ion-text color=\"success\" *ngIf=\"!hideSuccessMessage\">{{successMessage}}</ion-text>\n          </div>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n  </form>\n</ion-content>\n"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/small-components/header/header.component.html":
+/*!*****************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/small-components/header/header.component.html ***!
+  \*****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\" *ngIf=\"canGoBack\">\n      <ion-button (click)=\"previousPage()\"><ion-icon name=\"arrow-dropleft\"></ion-icon></ion-button>\n    </ion-buttons>\n    <ion-title *ngIf=\"pc\">\n      {{this.title}}\n    </ion-title>\n    <ion-title *ngIf=\"!pc\" size=\"small\">\n      {{this.title}}\n    </ion-title>\n    <!-- <ion-buttons *ngIf=\"connected\">\n      <ion-button (click)=\"this.reload()\">Refresh</ion-button>\n    </ion-buttons> -->\n    <ion-buttons slot=\"end\" *ngIf=\"connected\">\n      {{this.userName}}\n      <ion-button fill=\"solid\" color=\"primary\" (click)=\"this.logout()\"><ion-icon name=\"log-out\"></ion-icon></ion-button>\n    </ion-buttons>\n    <ion-buttons slot=\"end\" *ngIf=\"!connected\">\n      <ion-button fill=\"solid\" color=\"primary\" (click)=\"this.router.navigate(['/login'])\">Login</ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n"
 
 /***/ }),
 
@@ -60,7 +71,8 @@ var AuthService = /** @class */ (function () {
     AuthService.prototype.logout = function () {
         firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]()
             .signOut();
-        this.router.navigate(['/login']);
+        if (this.router.url !== '/login')
+            this.router.navigate(['/login']);
     };
     AuthService.prototype.getUsername = function () {
         return firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().currentUser ? firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().currentUser.email : "";
@@ -70,6 +82,12 @@ var AuthService = /** @class */ (function () {
     };
     AuthService.prototype.isConnected = function () {
         return firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().currentUser ? true : false;
+    };
+    AuthService.prototype.resetPassword = function (email) {
+        return firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().sendPasswordResetEmail(email);
+    };
+    AuthService.prototype.sendEmailVerif = function () {
+        return firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().currentUser.sendEmailVerification();
     };
     AuthService.ctorParameters = function () { return [
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }
@@ -295,10 +313,13 @@ var SignUpPage = /** @class */ (function () {
         this.authServ = authServ;
         this.users = users;
         this.router = router;
+        this.timeBeforeMessagesDisapear = 5000;
     }
     SignUpPage.prototype.ngOnInit = function () {
         this.hideErrMessage = true;
+        this.hideSuccessMessage = true;
         this.errMessage = "";
+        this.successMessage = "A verification email has been sent. You're going to be redirected in " + this.timeBeforeMessagesDisapear / 1000 + "s.";
     };
     SignUpPage.prototype.signUp = function (log, mdp, conflog, confmdp) {
         var _this = this;
@@ -315,11 +336,12 @@ var SignUpPage = /** @class */ (function () {
         }
         else {
             this.authServ.signup(log, mdp).then(function (value) {
-                console.log('Success!', value);
+                _this.authServ.sendEmailVerif();
                 var newUser = { email: log, uid: _this.authServ.getUserID() };
                 _this.users.addUser(newUser);
                 _this.hideErrMessage = true;
-                _this.router.navigate(['/login']);
+                _this.hideSuccessMessage = false;
+                setTimeout(function () { _this.hideSuccessMessage = true; _this.router.navigate(['/login']); }, _this.timeBeforeMessagesDisapear);
             })
                 .catch(function (err) {
                 _this.hideErrMessage = false;
@@ -342,6 +364,133 @@ var SignUpPage = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_authentification_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"], _services_users_service__WEBPACK_IMPORTED_MODULE_4__["UsersService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
     ], SignUpPage);
     return SignUpPage;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/small-components/header/header.component.scss":
+/*!***************************************************************!*\
+  !*** ./src/app/small-components/header/header.component.scss ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3NtYWxsLWNvbXBvbmVudHMvaGVhZGVyL2hlYWRlci5jb21wb25lbnQuc2NzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/small-components/header/header.component.ts":
+/*!*************************************************************!*\
+  !*** ./src/app/small-components/header/header.component.ts ***!
+  \*************************************************************/
+/*! exports provided: HeaderComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HeaderComponent", function() { return HeaderComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var src_app_services_authentification_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/authentification.service */ "./src/app/services/authentification.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+
+
+
+
+
+
+var HeaderComponent = /** @class */ (function () {
+    function HeaderComponent(authServ, router, platform, location) {
+        this.authServ = authServ;
+        this.router = router;
+        this.platform = platform;
+        this.location = location;
+    }
+    HeaderComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.pc = this.platform.is("desktop");
+        this.authServ.getLoggedInName.subscribe(function (event) { _this.userName = event; });
+        this.connected = this.authServ.isConnected();
+        this.userName = this.authServ.getUsername();
+        if (this.router.url !== '/listslist' && this.router.url !== '/login')
+            this.canGoBack = true;
+        else
+            this.canGoBack = false;
+    };
+    HeaderComponent.prototype.previousPage = function () {
+        this.location.back();
+    };
+    HeaderComponent.prototype.logout = function () {
+        this.authServ.logout();
+    };
+    HeaderComponent.ctorParameters = function () { return [
+        { type: src_app_services_authentification_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["Platform"] },
+        { type: _angular_common__WEBPACK_IMPORTED_MODULE_5__["Location"] }
+    ]; };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", String)
+    ], HeaderComponent.prototype, "title", void 0);
+    HeaderComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-header',
+            template: __webpack_require__(/*! raw-loader!./header.component.html */ "./node_modules/raw-loader/index.js!./src/app/small-components/header/header.component.html"),
+            styles: [__webpack_require__(/*! ./header.component.scss */ "./src/app/small-components/header/header.component.scss")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_authentification_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["Platform"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["Location"]])
+    ], HeaderComponent);
+    return HeaderComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/small-components/header/header.module.ts":
+/*!**********************************************************!*\
+  !*** ./src/app/small-components/header/header.module.ts ***!
+  \**********************************************************/
+/*! exports provided: HeaderModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HeaderModule", function() { return HeaderModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _header_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./header.component */ "./src/app/small-components/header/header.component.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+
+
+
+
+
+
+var HeaderModule = /** @class */ (function () {
+    function HeaderModule() {
+    }
+    HeaderModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+            declarations: [_header_component__WEBPACK_IMPORTED_MODULE_3__["HeaderComponent"]],
+            imports: [
+                _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"],
+                _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicModule"]
+            ],
+            exports: [
+                _header_component__WEBPACK_IMPORTED_MODULE_3__["HeaderComponent"]
+            ]
+        })
+    ], HeaderModule);
+    return HeaderModule;
 }());
 
 

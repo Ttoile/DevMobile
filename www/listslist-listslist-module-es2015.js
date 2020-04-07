@@ -205,7 +205,8 @@ let AuthService = class AuthService {
     logout() {
         firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]()
             .signOut();
-        this.router.navigate(['/login']);
+        if (this.router.url !== '/login')
+            this.router.navigate(['/login']);
     }
     getUsername() {
         return firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().currentUser ? firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().currentUser.email : "";
@@ -215,6 +216,12 @@ let AuthService = class AuthService {
     }
     isConnected() {
         return firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().currentUser ? true : false;
+    }
+    resetPassword(email) {
+        return firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().sendPasswordResetEmail(email);
+    }
+    sendEmailVerif() {
+        return firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().currentUser.sendEmailVerification();
     }
 };
 AuthService.ctorParameters = () => [

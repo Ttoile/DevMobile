@@ -275,7 +275,8 @@ var AuthService = /** @class */ (function () {
     AuthService.prototype.logout = function () {
         firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]()
             .signOut();
-        this.router.navigate(['/login']);
+        if (this.router.url !== '/login')
+            this.router.navigate(['/login']);
     };
     AuthService.prototype.getUsername = function () {
         return firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().currentUser ? firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().currentUser.email : "";
@@ -285,6 +286,12 @@ var AuthService = /** @class */ (function () {
     };
     AuthService.prototype.isConnected = function () {
         return firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().currentUser ? true : false;
+    };
+    AuthService.prototype.resetPassword = function (email) {
+        return firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().sendPasswordResetEmail(email);
+    };
+    AuthService.prototype.sendEmailVerif = function () {
+        return firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().currentUser.sendEmailVerification();
     };
     AuthService.ctorParameters = function () { return [
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }

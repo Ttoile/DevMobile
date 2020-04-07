@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-header [title]=\"'Sign up'\"></app-header>\n\n<ion-content >\n  <form  #form=\"ngForm\" (ngSubmit)=\"signUp(login.value,motDePasse.value,confirmLogin.value,confirmMotDePasse.value)\">\n    <ion-grid>\n      <ion-row color=\"primary\" justify-content-center>\n        <ion-col align-self-center size-md=\"6\" size-lg=\"5\" size-xs=\"12\">\n          <div text-center>\n            <h3>Create your account!</h3>\n          </div>\n          <div padding>\n            <ion-item>\n              <ion-input  name=\"email\" type=\"email\" placeholder=\"your@email.com\" ngModel required #login></ion-input>\n            </ion-item>\n            <ion-item>\n              <ion-input name=\"confirmemail\" type=\"email\" placeholder=\"your@email.com again\" ngModel required #confirmLogin></ion-input>\n            </ion-item>\n            <ion-item>\n              <ion-input name=\"password\" type=\"password\" placeholder=\"Password\" ngModel required #motDePasse></ion-input>\n            </ion-item>\n            <ion-item>\n              <ion-input name=\"confirm\" type=\"password\" placeholder=\"Password again\" ngModel required #confirmMotDePasse></ion-input>\n            </ion-item>\n          </div>\n          <div padding>\n            <ion-button  size=\"large\" type=\"submit\" [disabled]=\"form.invalid\" expand=\"block\">Register</ion-button>\n          </div>\n          <div padding>\n            <ion-text color=\"danger\" *ngIf=\"!hideErrMessage\">{{errMessage}}</ion-text>\n          </div>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n  </form>\n</ion-content>\n\n\n\n<!-- <ion-content>\n  <ion-input #login type=\"text\">Adresse Mail</ion-input>\n  <ion-input #confirmLogin type=\"text\">Confirmation adresse mail</ion-input>\n  <ion-input #motDePasse type=\"text\">Mot de passe</ion-input>\n  <ion-input #confirmMotDePasse type=\"text\">Confirmation mot de passe</ion-input>\n  <ion-button (click)=signUp(login.value,motDePasse.value,confirmLogin.value,confirmMotDePasse.value)>Sign-Up</ion-button>\n</ion-content> -->\n"
+module.exports = "<app-header [title]=\"'Sign up'\"></app-header>\n\n<ion-content >\n  <form  #form=\"ngForm\" (ngSubmit)=\"signUp(login.value,motDePasse.value,confirmLogin.value,confirmMotDePasse.value)\">\n    <ion-grid>\n      <ion-row color=\"primary\" justify-content-center>\n        <ion-col align-self-center size-md=\"6\" size-lg=\"5\" size-xs=\"12\">\n          <div text-center>\n            <h3>Create your account!</h3>\n          </div>\n          <div padding>\n            <ion-item>\n              <ion-input  name=\"email\" type=\"email\" placeholder=\"your@email.com\" ngModel required #login></ion-input>\n            </ion-item>\n            <ion-item>\n              <ion-input name=\"confirmemail\" type=\"email\" placeholder=\"your@email.com again\" ngModel required #confirmLogin></ion-input>\n            </ion-item>\n            <ion-item>\n              <ion-input name=\"password\" type=\"password\" placeholder=\"Password\" ngModel required #motDePasse></ion-input>\n            </ion-item>\n            <ion-item>\n              <ion-input name=\"confirm\" type=\"password\" placeholder=\"Password again\" ngModel required #confirmMotDePasse></ion-input>\n            </ion-item>\n          </div>\n          <div padding>\n            <ion-button  size=\"large\" type=\"submit\" [disabled]=\"form.invalid\" expand=\"block\">Register</ion-button>\n          </div>\n          <div padding>\n            <ion-text color=\"danger\" *ngIf=\"!hideErrMessage\">{{errMessage}}</ion-text>\n          </div>\n          <div padding>\n            <ion-text color=\"success\" *ngIf=\"!hideSuccessMessage\">{{successMessage}}</ion-text>\n          </div>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n  </form>\n</ion-content>\n"
 
 /***/ }),
 
@@ -59,7 +59,8 @@ let AuthService = class AuthService {
     logout() {
         firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]()
             .signOut();
-        this.router.navigate(['/login']);
+        if (this.router.url !== '/login')
+            this.router.navigate(['/login']);
     }
     getUsername() {
         return firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().currentUser ? firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().currentUser.email : "";
@@ -69,6 +70,12 @@ let AuthService = class AuthService {
     }
     isConnected() {
         return firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().currentUser ? true : false;
+    }
+    resetPassword(email) {
+        return firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().sendPasswordResetEmail(email);
+    }
+    sendEmailVerif() {
+        return firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().currentUser.sendEmailVerification();
     }
 };
 AuthService.ctorParameters = () => [
@@ -285,10 +292,13 @@ let SignUpPage = class SignUpPage {
         this.authServ = authServ;
         this.users = users;
         this.router = router;
+        this.timeBeforeMessagesDisapear = 5000;
     }
     ngOnInit() {
         this.hideErrMessage = true;
+        this.hideSuccessMessage = true;
         this.errMessage = "";
+        this.successMessage = "A verification email has been sent. You're going to be redirected in " + this.timeBeforeMessagesDisapear / 1000 + "s.";
     }
     signUp(log, mdp, conflog, confmdp) {
         //this.authServ.login(log, mdp);
@@ -304,11 +314,12 @@ let SignUpPage = class SignUpPage {
         }
         else {
             this.authServ.signup(log, mdp).then(value => {
-                console.log('Success!', value);
+                this.authServ.sendEmailVerif();
                 const newUser = { email: log, uid: this.authServ.getUserID() };
                 this.users.addUser(newUser);
                 this.hideErrMessage = true;
-                this.router.navigate(['/login']);
+                this.hideSuccessMessage = false;
+                setTimeout(() => { this.hideSuccessMessage = true; this.router.navigate(['/login']); }, this.timeBeforeMessagesDisapear);
             })
                 .catch(err => {
                 this.hideErrMessage = false;
