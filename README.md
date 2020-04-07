@@ -3,7 +3,8 @@
 Zigmann Bastien
 Dutronc Eliott
 
-Fonctionnalitées implémentées :
+##Fonctionnalitées implémentées :
+
 	- Listes de todo de base
 	- Ajout et suppression de todo
 	- Ajout et suppression de listes
@@ -14,7 +15,8 @@ Fonctionnalitées implémentées :
 	- Seul le créateur de la liste peut changer les contributors et leurs droits ou supprimer la liste.
 	- Cloud messaging implementé mais notifications uniquement fonctionnelles sur la webapp, pas sur le téléphone.
 
-Problèmes rencontrés :
+##Problèmes rencontrés :
+
  	- Configuration, configuration et configuration.
 	- Des problèmes de version de plugins
 	- Des problèmes de fichiers générés par l'executions qui n'étaient pas généré correctement
@@ -23,10 +25,11 @@ Problèmes rencontrés :
 	- Difficultés à build l'application au début (pas mal de configurations locales à faire)
 	- Connexion facebook implémentée mais faisait crash le build de l'apk (faute à un mauvais id dans un fichier de config généré), suite à de maintes recherches, on a enlevé cette fonctionnalité
 
-Fonctionnement du projet :
+##Fonctionnement du projet :
+
 	- ionic serve pour ouvrir le site.
-	Pour build l'application :
-		- Si c'est la première fois, générer une clé de release :
+	- Pour build l'application :
+		- Si c'est la première fois, générer une clé de release et son alias :
 			- keytool -genkey -v -keystore my-release-key.keystore -alias my_key_alias -keyalg RSA -keysize 2048 -validity 10000
 		- Ensuite, executer le script my-build.sh à la racine du projet, de la manière suivante :
 			- ./my_build.sh [votre clé de release avec le chemin pour y accéder] [alias de la clé de release]
