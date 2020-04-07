@@ -14,6 +14,9 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 
 import * as firebase from 'firebase';
+import {AsyncPipe} from '@angular/common';
+import {MessagingService} from './services/messaging.service';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
 
 firebase.initializeApp(environment.fbconfig);
 
@@ -21,11 +24,13 @@ firebase.initializeApp(environment.fbconfig);
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
-    AngularFireModule.initializeApp(environment.fbconfig),
+    AngularFireModule.initializeApp(environment.fbconfig), AngularFireMessagingModule,
     AngularFirestoreModule],
   providers: [
     StatusBar,
     SplashScreen,
+    AsyncPipe,
+    MessagingService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

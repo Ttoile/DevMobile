@@ -447,7 +447,7 @@ module.exports = webpackAsyncContext;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app>\n  <ion-router-outlet></ion-router-outlet>\n</ion-app>\n"
+module.exports = "{{ message | async | json }}\n<ion-app>\n  <ion-router-outlet></ion-router-outlet>\n</ion-app>\n"
 
 /***/ }),
 
@@ -552,16 +552,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/ngx/index.js");
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
+/* harmony import */ var _services_messaging_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./services/messaging.service */ "./src/app/services/messaging.service.ts");
+
 
 
 
 
 
 var AppComponent = /** @class */ (function () {
-    function AppComponent(platform, splashScreen, statusBar) {
+    function AppComponent(platform, splashScreen, statusBar, messagingService) {
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
+        this.messagingService = messagingService;
+        this.title = 'push-notification';
         this.initializeApp();
     }
     AppComponent.prototype.initializeApp = function () {
@@ -571,10 +575,16 @@ var AppComponent = /** @class */ (function () {
             _this.splashScreen.hide();
         });
     };
+    AppComponent.prototype.ngOnInit = function () {
+        this.messagingService.requestPermission();
+        this.messagingService.receiveMessage();
+        this.message = this.messagingService.currentMessage;
+    };
     AppComponent.ctorParameters = function () { return [
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"] },
         { type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"] },
-        { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] }
+        { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] },
+        { type: _services_messaging_service__WEBPACK_IMPORTED_MODULE_5__["MessagingService"] }
     ]; };
     AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -584,7 +594,8 @@ var AppComponent = /** @class */ (function () {
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"],
             _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"],
-            _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"]])
+            _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"],
+            _services_messaging_service__WEBPACK_IMPORTED_MODULE_5__["MessagingService"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -619,6 +630,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(angularfire2_firestore__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var firebase__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! firebase */ "./node_modules/firebase/dist/index.cjs.js");
 /* harmony import */ var firebase__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(firebase__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _services_messaging_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./services/messaging.service */ "./src/app/services/messaging.service.ts");
+/* harmony import */ var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/fire/messaging */ "./node_modules/@angular/fire/messaging/index.js");
+
+
+
 
 
 
@@ -641,11 +658,13 @@ var AppModule = /** @class */ (function () {
             declarations: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]],
             entryComponents: [],
             imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"],
-                angularfire2__WEBPACK_IMPORTED_MODULE_9__["AngularFireModule"].initializeApp(_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].fbconfig),
+                angularfire2__WEBPACK_IMPORTED_MODULE_9__["AngularFireModule"].initializeApp(_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].fbconfig), _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_15__["AngularFireMessagingModule"],
                 angularfire2_firestore__WEBPACK_IMPORTED_MODULE_11__["AngularFirestoreModule"]],
             providers: [
                 _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"],
                 _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"],
+                _angular_common__WEBPACK_IMPORTED_MODULE_13__["AsyncPipe"],
+                _services_messaging_service__WEBPACK_IMPORTED_MODULE_14__["MessagingService"],
                 { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"] }
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
@@ -713,6 +732,61 @@ var AuthguardGuard = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
     ], AuthguardGuard);
     return AuthguardGuard;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/messaging.service.ts":
+/*!***********************************************!*\
+  !*** ./src/app/services/messaging.service.ts ***!
+  \***********************************************/
+/*! exports provided: MessagingService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MessagingService", function() { return MessagingService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/fire/messaging */ "./node_modules/@angular/fire/messaging/index.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+
+
+
+
+var MessagingService = /** @class */ (function () {
+    function MessagingService(angularFireMessaging) {
+        this.angularFireMessaging = angularFireMessaging;
+        this.currentMessage = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](null);
+        this.angularFireMessaging.messaging.subscribe(function (_messaging) {
+            _messaging.onMessage = _messaging.onMessage.bind(_messaging);
+            _messaging.onTokenRefresh = _messaging.onTokenRefresh.bind(_messaging);
+        });
+    }
+    MessagingService.prototype.requestPermission = function () {
+        this.angularFireMessaging.requestToken.subscribe(function (token) {
+            console.log(token);
+        }, function (err) {
+            console.error('Unable to get permission to notify.', err);
+        });
+    };
+    MessagingService.prototype.receiveMessage = function () {
+        var _this = this;
+        this.angularFireMessaging.messages.subscribe(function (payload) {
+            console.log("new message received. ", payload);
+            _this.currentMessage.next(payload);
+        });
+    };
+    MessagingService.ctorParameters = function () { return [
+        { type: _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_2__["AngularFireMessaging"] }
+    ]; };
+    MessagingService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_fire_messaging__WEBPACK_IMPORTED_MODULE_2__["AngularFireMessaging"]])
+    ], MessagingService);
+    return MessagingService;
 }());
 
 
@@ -790,7 +864,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/sauww/Documents/M2/S2/ProjetAndroid/Projet/DevMobile/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/eliott/Documents/Cours/M2/DevMobile/DevMobile/src/main.ts */"./src/main.ts");
 
 
 /***/ })
