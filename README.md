@@ -33,4 +33,4 @@ Dutronc Eliott
 			- keytool -genkey -v -keystore my-release-key.keystore -alias my_key_alias -keyalg RSA -keysize 2048 -validity 10000
 		- Ensuite, executer le script my-build.sh à la racine du projet, de la manière suivante :
 			- ./my_build.sh [votre clé de release avec le chemin pour y accéder] [alias de la clé de release]
-		 	Ce script va générer l'apk signer et vous ouvrir son dossier dans le gestionnaire de fichier
+		 	Ce script va générer l'apk signé et vous ouvrir son dossier dans le gestionnaire de fichiers
