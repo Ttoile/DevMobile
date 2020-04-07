@@ -473,35 +473,39 @@ var routes = [
     { path: '', redirectTo: 'listslist', pathMatch: 'full' },
     {
         path: 'todoslist',
-        loadChildren: function () { return Promise.all(/*! import() | todoslist-todoslist-module */[__webpack_require__.e("default~contributor-manager-contributor-manager-module~todoslist-todoslist-module"), __webpack_require__.e("common"), __webpack_require__.e("todoslist-todoslist-module")]).then(__webpack_require__.bind(null, /*! ./todoslist/todoslist.module */ "./src/app/todoslist/todoslist.module.ts")).then(function (m) { return m.TodoslistPageModule; }); },
+        loadChildren: function () { return Promise.all(/*! import() | todoslist-todoslist-module */[__webpack_require__.e("default~contributor-manager-contributor-manager-module~todoslist-todoslist-module"), __webpack_require__.e("todoslist-todoslist-module")]).then(__webpack_require__.bind(null, /*! ./todoslist/todoslist.module */ "./src/app/todoslist/todoslist.module.ts")).then(function (m) { return m.TodoslistPageModule; }); },
         canActivate: [_services_authguard_guard__WEBPACK_IMPORTED_MODULE_3__["AuthguardGuard"]]
     },
     {
         path: 'addtodo',
-        loadChildren: function () { return Promise.all(/*! import() | addtodo-addtodo-module */[__webpack_require__.e("common"), __webpack_require__.e("addtodo-addtodo-module")]).then(__webpack_require__.bind(null, /*! ./addtodo/addtodo.module */ "./src/app/addtodo/addtodo.module.ts")).then(function (m) { return m.AddtodoPageModule; }); },
+        loadChildren: function () { return __webpack_require__.e(/*! import() | addtodo-addtodo-module */ "addtodo-addtodo-module").then(__webpack_require__.bind(null, /*! ./addtodo/addtodo.module */ "./src/app/addtodo/addtodo.module.ts")).then(function (m) { return m.AddtodoPageModule; }); },
         canActivate: [_services_authguard_guard__WEBPACK_IMPORTED_MODULE_3__["AuthguardGuard"]]
     },
     {
         path: 'login',
-        loadChildren: function () { return Promise.all(/*! import() | login-login-module */[__webpack_require__.e("common"), __webpack_require__.e("login-login-module")]).then(__webpack_require__.bind(null, /*! ./login/login.module */ "./src/app/login/login.module.ts")).then(function (m) { return m.LoginPageModule; }); },
+        loadChildren: function () { return __webpack_require__.e(/*! import() | login-login-module */ "login-login-module").then(__webpack_require__.bind(null, /*! ./login/login.module */ "./src/app/login/login.module.ts")).then(function (m) { return m.LoginPageModule; }); },
     },
     {
         path: 'sign-up',
-        loadChildren: function () { return Promise.all(/*! import() | sign-up-sign-up-module */[__webpack_require__.e("common"), __webpack_require__.e("sign-up-sign-up-module")]).then(__webpack_require__.bind(null, /*! ./sign-up/sign-up.module */ "./src/app/sign-up/sign-up.module.ts")).then(function (m) { return m.SignUpPageModule; }); }
+        loadChildren: function () { return __webpack_require__.e(/*! import() | sign-up-sign-up-module */ "sign-up-sign-up-module").then(__webpack_require__.bind(null, /*! ./sign-up/sign-up.module */ "./src/app/sign-up/sign-up.module.ts")).then(function (m) { return m.SignUpPageModule; }); }
     },
     {
         path: 'listslist',
-        loadChildren: function () { return Promise.all(/*! import() | listslist-listslist-module */[__webpack_require__.e("common"), __webpack_require__.e("listslist-listslist-module")]).then(__webpack_require__.bind(null, /*! ./listslist/listslist.module */ "./src/app/listslist/listslist.module.ts")).then(function (m) { return m.ListslistPageModule; }); },
+        loadChildren: function () { return Promise.all(/*! import() | listslist-listslist-module */[__webpack_require__.e("default~add-list-add-list-module~listslist-listslist-module"), __webpack_require__.e("listslist-listslist-module")]).then(__webpack_require__.bind(null, /*! ./listslist/listslist.module */ "./src/app/listslist/listslist.module.ts")).then(function (m) { return m.ListslistPageModule; }); },
         canActivate: [_services_authguard_guard__WEBPACK_IMPORTED_MODULE_3__["AuthguardGuard"]]
     },
     {
         path: 'add-list',
-        loadChildren: function () { return Promise.all(/*! import() | add-list-add-list-module */[__webpack_require__.e("common"), __webpack_require__.e("add-list-add-list-module")]).then(__webpack_require__.bind(null, /*! ./add-list/add-list.module */ "./src/app/add-list/add-list.module.ts")).then(function (m) { return m.AddListPageModule; }); },
+        loadChildren: function () { return Promise.all(/*! import() | add-list-add-list-module */[__webpack_require__.e("default~add-list-add-list-module~listslist-listslist-module"), __webpack_require__.e("add-list-add-list-module")]).then(__webpack_require__.bind(null, /*! ./add-list/add-list.module */ "./src/app/add-list/add-list.module.ts")).then(function (m) { return m.AddListPageModule; }); },
         canActivate: [_services_authguard_guard__WEBPACK_IMPORTED_MODULE_3__["AuthguardGuard"]]
     },
     {
         path: 'contributor-manager',
         loadChildren: function () { return __webpack_require__.e(/*! import() | contributor-manager-contributor-manager-module */ "default~contributor-manager-contributor-manager-module~todoslist-todoslist-module").then(__webpack_require__.bind(null, /*! ./contributor-manager/contributor-manager.module */ "./src/app/contributor-manager/contributor-manager.module.ts")).then(function (m) { return m.ContributorManagerPageModule; }); }
+    },
+    {
+        path: 'password-recover',
+        loadChildren: function () { return __webpack_require__.e(/*! import() | password-recover-password-recover-module */ "password-recover-password-recover-module").then(__webpack_require__.bind(null, /*! ./password-recover/password-recover.module */ "./src/app/password-recover/password-recover.module.ts")).then(function (m) { return m.PasswordRecoverPageModule; }); }
     },
 ];
 var AppRoutingModule = /** @class */ (function () {
@@ -786,7 +790,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/sauww/Documents/M2/S2/ProjetAndroid/Projet/DevMobile/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/eliott/Documents/Cours/M2/DevMobile/DevMobile/src/main.ts */"./src/main.ts");
 
 
 /***/ })

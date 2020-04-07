@@ -497,6 +497,10 @@ const routes = [
         path: 'contributor-manager',
         loadChildren: () => __webpack_require__.e(/*! import() | contributor-manager-contributor-manager-module */ "default~contributor-manager-contributor-manager-module~todoslist-todoslist-module").then(__webpack_require__.bind(null, /*! ./contributor-manager/contributor-manager.module */ "./src/app/contributor-manager/contributor-manager.module.ts")).then(m => m.ContributorManagerPageModule)
     },
+    {
+        path: 'password-recover',
+        loadChildren: () => Promise.all(/*! import() | password-recover-password-recover-module */[__webpack_require__.e("common"), __webpack_require__.e("password-recover-password-recover-module")]).then(__webpack_require__.bind(null, /*! ./password-recover/password-recover.module */ "./src/app/password-recover/password-recover.module.ts")).then(m => m.PasswordRecoverPageModule)
+    },
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -770,7 +774,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/sauww/Documents/M2/S2/ProjetAndroid/Projet/DevMobile/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/eliott/Documents/Cours/M2/DevMobile/DevMobile/src/main.ts */"./src/main.ts");
 
 
 /***/ })
