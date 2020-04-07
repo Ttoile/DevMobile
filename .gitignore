@@ -29,6 +29,7 @@ npm-debug.log*
 /platforms
 /plugins
 /www
+/www/*
 
 my-release-key.keystore
 my-build.sh
